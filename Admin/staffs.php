@@ -67,16 +67,16 @@ include 'sidebar.php';
     <!-- Navigation Items -->
 
     <ul>
-      <li><a href="index.php"><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Overview</a></li>
-      <li><a href="admin_menu.php" ><i class="fas fa-utensils" style="margin-right: 10px;"></i> Menu Management</a></li>
-      <li><a href="admin_orders.php"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Orders</a></li>
+      <li><a href="index.php"><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Ringkasan</a></li>
+      <li><a href="admin_menu.php" ><i class="fas fa-utensils" style="margin-right: 10px;"></i> Manajemen Menu</a></li>
+      <li><a href="admin_orders.php"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Pesanan</a></li>
       <li><a href="payment_proofs.php"><i class="fas fa-receipt" style="margin-right: 10px;"></i> Bukti Transfer</a></li>
-      <li><a href="reservations.php"><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Reservations</a></li>
-      <li><a href="users.php"><i class="fas fa-users" style="margin-right: 10px;"></i> Users</a></li>
-      <li><a href="reviews.php"><i class="fas fa-star" style="margin-right: 10px;"></i> Reviews</a></li>
-      <li><a href="staffs.php" class="active"><i class="fas fa-users" style="margin-right: 10px;"></i> Staffs</a></li>
-      <li><a href="profile.php"><i class="fas fa-user" style="margin-right: 10px;"></i> Profile Setting</a></li>
-      <li style="margin-right: 10px;"><a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Logout</a></li>
+      <li><a href="reservations.php"><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Reservasi</a></li>
+      <li><a href="users.php"><i class="fas fa-users" style="margin-right: 10px;"></i> Pengguna</a></li>
+      <li><a href="reviews.php"><i class="fas fa-star" style="margin-right: 10px;"></i> Ulasan</a></li>
+      <li><a href="staffs.php" class="active"><i class="fas fa-users" style="margin-right: 10px;"></i> Staf</a></li>
+      <li><a href="profile.php"><i class="fas fa-user" style="margin-right: 10px;"></i> Pengaturan Profil</a></li>
+      <li style="margin-right: 10px;"><a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Keluar</a></li>
     </ul>
   </div>
   <div class="content">

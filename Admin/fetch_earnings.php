@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 
 // Database connection parameters
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "restaurant";
+$username = "cheapiza";
+$password = "cheapz2026";
+$dbname = "cheapiza_fastfood";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

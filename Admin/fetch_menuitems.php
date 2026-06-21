@@ -3,9 +3,9 @@
 <?php
 // Establish a connection to the database
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "restaurant";
+$username = "cheapiza";
+$password = "cheapz2026";
+$dbname = "cheapiza_fastfood";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -11,7 +11,7 @@ if (!isset($_SESSION['adminloggedin']) || !$_SESSION['adminloggedin']) {
 $admin_email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
 if (empty($admin_email)) {
-  die("Admin email not found in session.");
+  die("Email Admin tidak ditemukan di session.");
 }
 
 // Database connection
@@ -97,7 +97,7 @@ $admin_info = getAdminInfo($admin_email);
     <div class="profile-section">
       <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
       <div class="info">
-        <h3>Welcome Back!</h3>
+        <h3>Selamat datang kembali!</h3>
         <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
       </div>
     </div>
@@ -105,16 +105,16 @@ $admin_info = getAdminInfo($admin_email);
     <!-- Navigation Items -->
 
     <ul>
-            <li><a href="index.php" ><i class="fas fa-chart-line"></i> Overview</a></li>
-            <li><a href="admin_menu.php" ><i class="fas fa-utensils"></i> Menu Management</a></li>
-            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+            <li><a href="index.php" ><i class="fas fa-chart-line"></i> Ringkasan</a></li>
+            <li><a href="admin_menu.php" ><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
             <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
-            <!--<li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservations</a></li>-->
-            <!--<li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>-->
-            <li><a href="reviews.php"><i class="fas fa-star"></i> Reviews</a></li>
-            <!--<li><a href="staffs.php" ><i class="fas fa-users"></i> Staffs</a></li>-->
-            <li><a href="profile.php" class="active"><i class="fas fa-user"></i> Profile Setting</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li>
+            <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li>
+            <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
+            <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
+            <li><a href="profile.php" class="active"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
         </ul>
   </div>
   <div class="content">
@@ -122,7 +122,7 @@ $admin_info = getAdminInfo($admin_email);
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-user"></i> Profile Setting</h2>
+      <h2><i class="fas fa-user"></i> Pengaturan Profil</h2>
     </div>
     <div class="wrapper">
       <div class="container">
@@ -132,12 +132,12 @@ $admin_info = getAdminInfo($admin_email);
           <div class="form-row">
             <div class="form-group">
               <input type="text" id="firstName" name="firstName" value="<?php echo htmlspecialchars($admin_info['firstName']); ?>" placeholder=" ">
-              <label for="firstName">First Name:</label>
+              <label for="firstName">Nama Depan:</label>
             </div>
 
             <div class="form-group">
               <input type="text" id="lastName" name="lastName" value="<?php echo htmlspecialchars($admin_info['lastName']); ?>" placeholder=" ">
-              <label for="lastName">Last Name:</label>
+              <label for="lastName">Nama Belakang:</label>
             </div>
           </div>
 
@@ -149,7 +149,7 @@ $admin_info = getAdminInfo($admin_email);
 
             <div class="form-group">
               <input type="text" id="contact" name="contact" value="<?php echo htmlspecialchars($admin_info['contact']); ?>" placeholder=" ">
-              <label for="contact">Contact Number:</label>
+              <label for="contact">Nomor Telepon:</label>
             </div>
           </div>
 
@@ -168,7 +168,7 @@ $admin_info = getAdminInfo($admin_email);
 
     
 
-          <button type="submit">Save Settings</button>
+          <button type="submit">Simpan Pengaturan</button>
         </form>
       </div>
     </div>

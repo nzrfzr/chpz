@@ -42,7 +42,7 @@ if ($orderId) {
 $paymentMode = $order['pmode'] ?? 'takeaway'; // Default to 'takeaway' if not set
 
 // Determine the delivery fee based on the payment mode
-$deliveryFee = ($paymentMode === 'takeaway') ? 0 : 130;
+$deliveryFee = (strcasecmp($paymentMode, 'takeaway') === 0) ? 0 : 1000;
 ?>
 <?php
 include 'sidebar.php';
@@ -74,23 +74,23 @@ include 'sidebar.php';
     <div class="profile-section">
       <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
       <div class="info">
-        <h3>Welcome Back!</h3>
+        <h3>Selamat Datang Kembali!</h3>
         <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
       </div>
     </div>
 
     <!-- Navigation Items -->
     <ul>
-      <li><a href="index.php"><i class="fas fa-chart-line"></i> Overview</a></li>
-      <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Menu Management</a></li>
-      <li><a href="admin_orders.php" class="active"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+      <li><a href="index.php"><i class="fas fa-chart-line"></i> Ringkasan</a></li>
+      <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+      <li><a href="admin_orders.php" class="active"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
       <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
-      <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservations</a></li>
-      <li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>
-      <li><a href="reviews.php"><i class="fas fa-star"></i> Reviews</a></li>
-      <li><a href="staffs.php"><i class="fas fa-users"></i> Staffs</a></li>
-      <li><a href="profile.php"><i class="fas fa-user"></i> Profile Setting</a></li>
-      <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      <!-- <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li> -->
+      <!-- <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li> -->
+      <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
+      <!-- <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li> -->
+      <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+      <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
     </ul>
   </div>
   <div class="content">
@@ -99,16 +99,16 @@ include 'sidebar.php';
         <button id="toggleSidebar" class="toggle-button">
           <i class="fas fa-bars"></i>
         </button>
-        <h2><i class="fas fa-shopping-cart"></i>#<?php echo $order['order_id']; ?> Order Details</h2>
+        <h2><i class="fas fa-shopping-cart"></i>#<?php echo $order['order_id']; ?> Detail Pesanan</h2>
       </div>
       <div class="col d-flex justify-content-end">
-        <a href="admin_orders.php" class="button"><i class="fas fa-arrow-left"></i>&nbsp; Orders</a>
+        <a href="admin_orders.php" class="button"><i class="fas fa-arrow-left"></i>&nbsp; Pesanan</a>
       </div>
     </div>
     <div class="details">
       <div class="order-details">
         <div class="order-items">
-          <h4 class="mt-2">Order Items</h4>
+          <h4 class="mt-2">Item Pesanan</h4>
           <hr>
           <ul class="list-group">
             <?php while ($item = $itemsResult->fetch_assoc()) : ?>
@@ -119,7 +119,7 @@ include 'sidebar.php';
                   if (!empty($item['image'])) {
                     echo '<img src="../uploads/' . htmlspecialchars($item['image']) . '" alt="Item Image" style="width: 70px; height: 70px; object-fit: cover;">';
                   } else {
-                    echo '<span>No image available</span>';
+                    echo '<span>Gambar tidak tersedia</span>';
                   }
                   ?>
                   <?php echo $item['itemName']; ?>
@@ -127,11 +127,11 @@ include 'sidebar.php';
                 <div>
                   <div class="d-flex flex-row justify-content-between align-items-start quantity-price">
                     <div>
-                      Rs <?php echo $item['price']; ?> x <?php echo $item['quantity']; ?>
+                      Rp <?php echo $item['price']; ?> x <?php echo $item['quantity']; ?>
                     </div>
                   </div>
                   <div class="d-flex flex-row justify-content-end align-items-end">
-                    <span class="badge rounded-pill text-light p-2 mt-2" style="background-color: #fb4a36; ">Rs <?php echo $item['total_price']; ?></span>
+                    <span class="badge rounded-pill text-light p-2 mt-2" style="background-color: #fb4a36; ">Rp <?php echo $item['total_price']; ?></span>
                   </div>
                 </div>
               </li>
@@ -139,24 +139,34 @@ include 'sidebar.php';
           </ul>
         </div>
         <div class="order-summary">
-          <h4 class="mt-2">Order Fee</h4>
+          <h4 class="mt-2">Biaya Pesanan</h4>
           <hr>
           <div class="summary-details">
             <p><strong>Subtotal:</strong></p>
-            <p> Rs <?php echo $order['sub_total']; ?></p>
+            <p> Rp <?php echo $order['sub_total']; ?></p>
           </div>
 
           <div class="summary-details">
-            <p><strong>Fee:</strong></p>
-            <p>Rs <?= number_format($deliveryFee, 2) ?></p>
+            <p><strong>Biaya Pengiriman:</strong></p>
+            <p>Rp <?= number_format($deliveryFee, 2) ?></p>
           </div>
           <div class="summary-details">
             <p><strong>Total:</strong></p>
-            <p> Rs <?php echo $order['grand_total']; ?></p>
+            <p> Rp <?php echo $order['grand_total']; ?></p>
           </div>
           <div class="summary-details">
-            <p><strong>Payment Mode:</strong></p>
-            <p><?php echo $order['pmode'] === 'Card' ? 'Transfer (QRIS)' : $order['pmode']; ?></p>
+            <p><strong>Metode Pembayaran:</strong></p>
+            <p><?php 
+              if ($order['pmode'] === 'Card') {
+                  echo 'Transfer (QRIS)';
+              } elseif ($order['pmode'] === 'Takeaway') {
+                  echo 'Ambil di tempat';
+              } elseif ($order['pmode'] === 'Cash') {
+                  echo 'Tunai (Cash)';
+              } else {
+                  echo htmlspecialchars($order['pmode']);
+              }
+            ?></p>
           </div>
           <?php if ($proofImage !== null): ?>
           <div class="summary-details mt-2">
@@ -169,44 +179,44 @@ include 'sidebar.php';
           </div>
           <?php endif; ?>
           <div class="summary-details">
-            <p style="width: 60%;"><strong>Payment Status:</strong></p>
+            <p style="width: 60%;"><strong>Status Pembayaran:</strong></p>
             <select class="form-select" id="paymentStatus" name="payment_status">
-              <option value="Pending" <?php if ($order['payment_status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-              <option value="Successful" <?php if ($order['payment_status'] == 'Successful') echo 'selected'; ?>>Successful</option>
-              <option value="Rejected" <?php if ($order['payment_status'] == 'Rejected') echo 'selected'; ?>>Rejected</option>
+              <option value="Pending" <?php if ($order['payment_status'] == 'Pending') echo 'selected'; ?>>Menunggu (Pending)</option>
+              <option value="Successful" <?php if ($order['payment_status'] == 'Successful') echo 'selected'; ?>>Berhasil (Successful)</option>
+              <option value="Rejected" <?php if ($order['payment_status'] == 'Rejected') echo 'selected'; ?>>Ditolak (Rejected)</option>
             </select>
           </div>
           <div class="summary-details">
-            <p><strong>Cancel Reason:</strong></p>
+            <p><strong>Alasan Pembatalan:</strong></p>
             <p><?php echo $order['cancel_reason']; ?></p>
           </div>
           <hr>
           <form method="post" action="update_order_status.php" onsubmit="return validateForm()">
             <div class="status-container">
-              <label for="orderStatus" class="form-label"><strong>Order Status</strong></label>
+              <label for="orderStatus" class="form-label"><strong>Status Pesanan</strong></label>
               <select class="form-select" id="orderStatus" name="order_status">
-                <option value="Pending" <?php if ($order['order_status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                <option value="Processing" <?php if ($order['order_status'] == 'Processing') echo 'selected'; ?>>Processing</option>
-                <option value="Completed" <?php if ($order['order_status'] == 'Completed') echo 'selected'; ?>>Completed</option>
-                <option value="Cancelled" <?php if ($order['order_status'] == 'Cancelled') echo 'selected'; ?>>Cancelled</option>
-                <option value="On the way" <?php if ($order['order_status'] == 'On the way') echo 'selected'; ?>>On the way</option>
+                <option value="Pending" <?php if ($order['order_status'] == 'Pending') echo 'selected'; ?>>Menunggu (Pending)</option>
+                <option value="Processing" <?php if ($order['order_status'] == 'Processing') echo 'selected'; ?>>Diproses (Processing)</option>
+                <option value="Completed" <?php if ($order['order_status'] == 'Completed') echo 'selected'; ?>>Selesai (Completed)</option>
+                <option value="Cancelled" <?php if ($order['order_status'] == 'Cancelled') echo 'selected'; ?>>Dibatalkan (Cancelled)</option>
+                <option value="On the way" <?php if ($order['order_status'] == 'On the way') echo 'selected'; ?>>Sedang Dikirim (On the way)</option>
               </select>
             </div>
             <div class="mb-3" id="cancelReasonContainer" style="display: none;">
-              <label for="cancelReason" class="form-label">Cancellation Reason</label>
+              <label for="cancelReason" class="form-label">Alasan Pembatalan</label>
               <textarea class="form-control" id="cancelReason" name="cancel_reason"></textarea>
             </div>
             <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-            <button type="submit" id="statusbtn">Update Status</button>
+            <button type="submit" id="statusbtn">Perbarui Status</button>
           </form>
         </div>
       </div>
       <div class="customer mb-4">
-        <h4 class="mt-2">Customer Details</h4>
+        <h4 class="mt-2">Detail Pelanggan</h4>
         <hr>
         <div class="customer-details">
           <div class="summary-details">
-            <p><strong>Name:</strong></p>
+            <p><strong>Nama:</strong></p>
             <p><?php echo $order['firstName'] . ' ' . $order['lastName']; ?></p>
           </div>
           <div class="summary-details">
@@ -214,15 +224,15 @@ include 'sidebar.php';
             <p><?php echo $order['email']; ?></p>
           </div>
           <div class="summary-details">
-            <p><strong>Contact:</strong></p>
+            <p><strong>Kontak:</strong></p>
             <p><?php echo $order['phone']; ?></p>
           </div>
           <div class="summary-details">
-            <p><strong>Address:</strong></p>
+            <p><strong>Alamat:</strong></p>
             <p><?php echo $order['address']; ?></p>
           </div>
           <div class="summary-details">
-            <p><strong>Order Note:</strong></p>
+            <p><strong>Catatan Pesanan:</strong></p>
             <p><?php echo $order['note']; ?></p>
           </div>
         </div>
@@ -248,7 +258,7 @@ include 'sidebar.php';
       xhr.onload = function() {
         if (xhr.status === 200) {
           // Optionally, show a success message or handle errors
-          alert('Payment status updated successfully');
+          alert('Status pembayaran berhasil diperbarui');
         } else {
           console.error('Error updating payment status');
         }
@@ -273,7 +283,7 @@ include 'sidebar.php';
       if (orderStatus === 'Cancelled') {
         const cancelReason = document.getElementById('cancelReason').value;
         if (cancelReason.trim() === '') {
-          alert('Please provide a cancellation reason.');
+          alert('Silakan masukkan alasan pembatalan.');
           return false;
         }
       }

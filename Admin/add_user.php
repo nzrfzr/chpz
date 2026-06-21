@@ -1,9 +1,9 @@
 <?php
 // Database configuration
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "restaurant";
+$username = "cheapiza";
+$password = "cheapz2026";
+$dbname = "cheapiza_fastfood";
 
 // Enable error reporting (optional, for debugging)
 ini_set('display_errors', 1);

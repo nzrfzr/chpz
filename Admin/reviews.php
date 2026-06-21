@@ -18,7 +18,7 @@ include 'sidebar.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Review Management</title>
+  <title>Admin - Review</title>
 
   <!--poppins-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@ include 'sidebar.php';
     <div class="profile-section">
       <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
       <div class="info">
-        <h3>Welcome Back!</h3>
+        <h3>Selamat datang kembali!</h3>
         <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
       </div>
     </div>
@@ -46,16 +46,16 @@ include 'sidebar.php';
     <!-- Navigation Items -->
 
     <ul>
-      <li><a href="index.php"><i class="fas fa-chart-line"></i> Overview</a></li>
-      <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Menu Management</a></li>
-      <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+      <li><a href="index.php"><i class="fas fa-chart-line"></i> Ringkasan</a></li>
+      <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+      <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
       <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
-      <!--<li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservations</a></li>-->
-      <!--<li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>-->
-      <li><a href="reviews.php" class="active"><i class="fas fa-star"></i> Reviews</a></li>
-      <!--<li><a href="staffs.php"><i class="fas fa-users"></i> Staffs</a></li>-->
-      <li><a href="profile.php"><i class="fas fa-user"></i> Profile Setting</a></li>
-      <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li>
+      <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li>
+      <li><a href="reviews.php" class="active"><i class="fas fa-star"></i> Ulasan</a></li>
+      <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
+      <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+      <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
     </ul>
   </div>
   <div class="content">
@@ -63,15 +63,15 @@ include 'sidebar.php';
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-star"></i> Reviews</h2>
+      <h2><i class="fas fa-star"></i> Ulasan</h2>
     </div>
 
     <div class="actions">
       <select id="statusFilter" name="statusFilter" onchange="filterByStatus()">
-        <option value="">All</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
+        <option value="">Semua</option>
+        <option value="pending">Belum Disetujui</option>
+        <option value="approved">Disetujui</option>
+        <option value="rejected">Ditolak</option>
       </select>
     </div>
 
@@ -79,13 +79,13 @@ include 'sidebar.php';
       <table id="reviewTable">
         <thead>
           <tr>
-            <th>Order ID</th>
-            <th>Email</th>
-            <th>Review Text</th>
+            <th>ID Pesanan</th>
+            <th>Email Pelanggan</th>
+            <th>Ulasan</th>
             <th>Rating</th>
             <th>Status</th>
-            <th>Response</th>
-            <th>Actions</th>
+            <th>Respon</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -148,7 +148,7 @@ include 'sidebar.php';
         <div class="modal-content">
           <div class="input-group">
             <input type="number" name="order_id" id="editOrder_id" class="input" readonly>
-            <label for="editOrder_id" class="label">Order ID</label>
+            <label for="editOrder_id" class="label">ID Pesanan</label>
           </div>
         </div>
         <div class="modal-content">
@@ -160,7 +160,7 @@ include 'sidebar.php';
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="review_text" id="editReview_text" class="input" readonly>
-            <label for="editReview_text" class="label">Review Text</label>
+            <label for="editReview_text" class="label">Ulasan</label>
           </div>
         </div>
         <div class="modal-content">
@@ -172,12 +172,12 @@ include 'sidebar.php';
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="response" id="editResponse" class="input" required>
-            <label for="editResponse" class="label">Response</label>
+            <label for="editResponse" class="label">Respon</label>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="button" onclick="closeEditReviewModal()">Cancel</button>
-          <button type="submit" class="button">Save</button>
+          <button type="submit" class="button">Simpan</button>
         </div>
       </form>
     </div>
@@ -210,7 +210,7 @@ include 'sidebar.php';
 
     function deleteReview(orderId, email) {
       // Confirm and handle review deletion
-      if (confirm('Are you sure you want to delete this review?')) {
+      if (confirm('Apakah Anda yakin ingin menghapus ulasan ini?')) {
         // Send delete request to server
         fetch('delete_review.php', {
             method: 'POST',
@@ -225,10 +225,10 @@ include 'sidebar.php';
           .then(response => response.json())
           .then(data => {
             if (data.success) {
-              alert('Review deleted successfully');
+              alert('Ulasan berhasil dihapus');
               location.reload(); // Reload the page to see the updated list
             } else {
-              alert('Error deleting review');
+              alert('Gagal menghapus ulasan');
             }
           });
       }

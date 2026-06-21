@@ -17,7 +17,7 @@ include 'sidebar.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Menu Management</title>
+    <title>Manajemen Menu Admin</title>
 
     <!--poppins-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,7 @@ include 'sidebar.php';
         <div class="profile-section">
             <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
             <div class="info">
-                <h3>Welcome Back!</h3>
+                <h3>Selamat Datang Kembali!</h3>
                 <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
             </div>
         </div>
@@ -44,16 +44,16 @@ include 'sidebar.php';
         <!-- Navigation Items -->
 
         <ul>
-            <li><a href="index.php"><i class="fas fa-chart-line"></i> Overview</a></li>
-            <li><a href="admin_menu.php" class="active"><i class="fas fa-utensils"></i> Menu Management</a></li>
-            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+            <li><a href="index.php"><i class="fas fa-chart-line"></i> Ringkasan</a></li>
+            <li><a href="admin_menu.php" class="active"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
             <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
-            <!-- <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservations</a></li>-->
-            <!--@users.php@ <a href="users.php"><i class="fas fa-users"></i> Users</a>-->
-            <li><a href="reviews.php"><i class="fas fa-star"></i> Reviews</a></li>
-            <!--@staffs.php@ <a href="staffs.php"><i class="fas fa-users"></i> Staffs</a>-->
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile Setting</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li>
+            <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li>
+            <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
+            <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
         </ul>
     </div>
 
@@ -62,17 +62,17 @@ include 'sidebar.php';
             <button id="toggleSidebar" class="toggle-button">
                 <i class="fas fa-bars"></i>
             </button>
-            <h2><i class="fas fa-utensils"></i> Menu Management</h2>
+            <h2><i class="fas fa-utensils"></i> Manajemen Menu</h2>
         </div>
         <div class="modal-row">
             <div>
-                <button onclick="openModal()"><i class="fas fa-plus"></i> &nbsp;Add New Category</button>
-                <button onclick="openItemModal()"> <i class="fas fa-plus"></i> &nbsp;Add New Item</button>
-                <button onclick="openViewCategoryModal()"> <i class="fas fa-eye"></i> &nbsp;View Categories</button>
+                <button onclick="openModal()"><i class="fas fa-plus"></i> &nbsp;Tambah Kategori Baru</button>
+                <button onclick="openItemModal()"> <i class="fas fa-plus"></i> &nbsp;Tambah Item Baru</button>
+                <button onclick="openViewCategoryModal()"> <i class="fas fa-eye"></i> &nbsp;Lihat Kategori</button>
             </div>
             <div class="search-bar ">
                 <select id="categoryFilter" onchange="filterCategories()">
-                    <option value="">All Categories</option>
+                    <option value="">Semua Kategori</option>
                     <?php
                     $sql = "SELECT catName FROM menucategory";
                     $result = mysqli_query($conn, $sql);
@@ -89,14 +89,14 @@ include 'sidebar.php';
         <table id="menuTable">
             <thead>
                 <tr>
-                    <th>Item Name</th>
-                    <th>Image</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Category</th>
+                    <th>Nama Item</th>
+                    <th>Gambar</th>
+                    <th>Deskripsi</th>
+                    <th>Harga</th>
+                    <th>Kategori</th>
                     <th>Status</th>
-                    <th>Popular</th>
-                    <th>Actions</th>
+                    <th>Populer</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -107,13 +107,14 @@ include 'sidebar.php';
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $isPopularChecked = $row['is_popular'] ? 'checked' : '';
+                        $status_display = $row['status'] === 'Available' ? 'Tersedia' : ($row['status'] === 'Unavailable' ? 'Tidak Tersedia' : $row['status']);
                         echo "<tr data-category='{$row['catName']}'>
                 <td>{$row['itemName']}</td>
                 <td><img src='../uploads/{$row['image']}' alt='{$row['itemName']}' width='50'></td>
                 <td>{$row['description']}</td>
                 <td>Rp {$row['price']}</td>
                 <td>{$row['catName']}</td>
-                <td>{$row['status']}</td>
+                <td>{$status_display}</td>
                 <td>
                     <div class='toggler'>
                         <input id='toggler-{$row['itemId']}' name='toggler-{$row['itemId']}' type='checkbox' value='1' $isPopularChecked onchange='togglePopular({$row['itemId']}, this)'>
@@ -135,7 +136,7 @@ include 'sidebar.php';
               </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='8' style='text-align: center;'>No menu items found</td></tr>";
+                    echo "<tr><td colspan='8' style='text-align: center;'>Item menu tidak ditemukan</td></tr>";
                 }
                 ?>
 
@@ -149,18 +150,18 @@ include 'sidebar.php';
         <div class="modal-container">
             <form class="form" method="POST" action="add_category.php">
                 <div class="modal-header">
-                    <h2>Add New Category</h2>
+                    <h2>Tambah Kategori Baru</h2>
                     <span class="close-icon" onclick="closeModal()">&times;</span>
                 </div>
                 <div class="modal-content">
                     <div class="input-group">
                         <input type="text" name="catName" id="catName" class="input" required>
-                        <label for="catName" class="label">Category Name</label>
+                        <label for="catName" class="label">Nama Kategori</label>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="button" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="button">Save</button>
+                    <button type="button" class="button" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="button">Simpan</button>
                 </div>
             </form>
         </div>
@@ -171,34 +172,34 @@ include 'sidebar.php';
         <div class="modal-container">
             <form class="form" method="POST" action="add_item.php" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h2>Add New Item</h2>
+                    <h2>Tambah Item Baru</h2>
                     <span class="close-icon" onclick="closeItemModal()">&times;</span>
                 </div>
                 <div class="modal-content">
                     <div class="input-group">
                         <input type="text" name="itemName" id="itemName" class="input" required>
-                        <label for="itemName" class="label">Item Name</label>
+                        <label for="itemName" class="label">Nama Item</label>
                     </div>
                     <div class="input-group">
                         <input type="text" name="description" id="description" class="input" required>
-                        <label for="description" class="label">Description</label>
+                        <label for="description" class="label">Deskripsi</label>
                     </div>
                     <div class="input-group">
                         <select name="status" id="status" class="input" required>
                             <option value="">Status</option>
-                            <option value="Available">Available</option>
-                            <option value="Unavailable">Unavailable</option>
+                            <option value="Available">Tersedia (Available)</option>
+                            <option value="Unavailable">Tidak Tersedia (Unavailable)</option>
                         </select>
                         <label for="status" class="label">Status</label>
                     </div>
 
                     <div class="input-group">
                         <input type="number" name="price" id="price" class="input" required>
-                        <label for="price" class="label">Price</label>
+                        <label for="price" class="label">Harga</label>
                     </div>
                     <div class="input-group">
                         <select name="catName" id="catName" class="input" required>
-                            <option value="">Select Category</option>
+                            <option value="">Pilih Kategori</option>
                             <?php
                             $sql = "SELECT catName FROM menucategory";
                             $result = mysqli_query($conn, $sql);
@@ -207,7 +208,7 @@ include 'sidebar.php';
                             }
                             ?>
                         </select>
-                        <label for="catName" class="label">Category</label>
+                        <label for="catName" class="label">Kategori</label>
                     </div>
                     <div class="input-group">
                         <input type="file" name="image" id="image" class="input" accept="image/*" required>
@@ -215,8 +216,8 @@ include 'sidebar.php';
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="button" onclick="closeItemModal()">Cancel</button>
-                    <button type="submit" class="button">Save</button>
+                    <button type="button" class="button" onclick="closeItemModal()">Batal</button>
+                    <button type="submit" class="button">Simpan</button>
                 </div>
             </form>
         </div>
@@ -236,22 +237,22 @@ include 'sidebar.php';
                     <input type="hidden" name="existingImage" id="editExistingImage">
                     <div class="input-group">
                         <input type="text" name="itemName" id="editItemName" class="input" required>
-                        <label for="editItemName" class="label">Item Name</label>
+                        <label for="editItemName" class="label">Nama Item</label>
                     </div>
                     <div class="input-group">
                         <input type="text" name="description" id="editDescription" class="input" required>
-                        <label for="editDescription" class="label">Description</label>
+                        <label for="editDescription" class="label">Deskripsi</label>
                     </div>
                     <div class="input-group">
                         <select name="status" id="editStatus" class="input" required>
-                            <option value="Available">Available</option>
-                            <option value="Unavailable">Unavailable</option>
+                            <option value="Available">Tersedia (Available)</option>
+                            <option value="Unavailable">Tidak Tersedia (Unavailable)</option>
                         </select>
                         <label for="editStatus" class="label">Status</label>
                     </div>
                     <div class="input-group">
                         <input type="number" name="price" id="editPrice" class="input" required>
-                        <label for="editPrice" class="label">Price</label>
+                        <label for="editPrice" class="label">Harga</label>
                     </div>
                     <div class="input-group">
                         <select name="catName" id="editCatName" class="input" required>
@@ -263,17 +264,17 @@ include 'sidebar.php';
                             }
                             ?>
                         </select>
-                        <label for="editCatName" class="label">Category</label>
+                        <label for="editCatName" class="label">Kategori</label>
                     </div>
 
                     <div class="input-group">
                         <input type="file" name="image" id="editImage" class="input" accept="image/*">
-                        <small>Leave empty if not changing</small>
+                        <small>Biarkan kosong jika tidak diubah</small>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="button" onclick="closeEditItemModal()">Cancel</button>
-                    <button type="submit" class="button">Save</button>
+                    <button type="button" class="button" onclick="closeEditItemModal()">Batal</button>
+                    <button type="submit" class="button">Simpan</button>
                 </div>
             </form>
         </div>
@@ -284,7 +285,7 @@ include 'sidebar.php';
         <div class="modal-overlay"></div>
         <div class="modal-container" style="background: #fef0e8;">
             <div class="modal-header" style=" border-bottom: 1px solid #ffc9b3">
-                <h2>Categories</h2>
+                <h2>Kategori</h2>
                 <span class="close-icon" onclick="closeViewCategoryModal()">&times;</span>
             </div>
             <div class="modal-content">
@@ -292,8 +293,8 @@ include 'sidebar.php';
                     <table id="categoryTable" style="width:100%; border-collapse: collapse;">
                         <thead>
                             <tr>
-                                <th>Category Name</th>
-                                <th>Action</th>
+                                <th>Nama Kategori</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -308,7 +309,7 @@ include 'sidebar.php';
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='2'>No categories found</td></tr>";
+                                echo "<tr><td colspan='2'>Kategori tidak ditemukan</td></tr>";
                             }
                             ?>
                         </tbody>
@@ -316,7 +317,7 @@ include 'sidebar.php';
                 </div>
             </div>
             <div class="modal-footer" style="border-top: 1px solid #ffc9b3">
-                <button type="button" class="button" onclick="closeViewCategoryModal()">Close</button>
+                <button type="button" class="button" onclick="closeViewCategoryModal()">Tutup</button>
             </div>
         </div>
     </div>
@@ -331,7 +332,7 @@ include 'sidebar.php';
         }
 
         function deleteCategory(catName) {
-            if (confirm(`Are you sure you want to delete the category: ${catName}?`)) {
+            if (confirm(`Apakah Anda yakin ingin menghapus kategori: ${catName}?`)) {
                 // Perform AJAX request to delete the category from the database
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "delete_category.php", true);
@@ -339,11 +340,11 @@ include 'sidebar.php';
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
-                            alert("Category deleted successfully.");
+                            alert("Kategori berhasil dihapus.");
                             // Reload the modal content or remove the row from the table
                             location.reload(); // Reload the page to reflect changes
                         } else {
-                            alert("Failed to delete the category. Please try again.");
+                            alert("Gagal menghapus kategori. Silakan coba lagi.");
                         }
                     }
                 };
@@ -453,7 +454,7 @@ include 'sidebar.php';
         }
 
         function deleteItem(itemId) {
-            if (confirm("Are you sure you want to delete this item?")) {
+            if (confirm("Apakah Anda yakin ingin menghapus item ini?")) {
                 window.location.href = `delete_item.php?id=${itemId}`;
             }
         }

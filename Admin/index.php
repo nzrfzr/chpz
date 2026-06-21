@@ -10,9 +10,9 @@ if (!isset($_SESSION['adminloggedin']) || !$_SESSION['adminloggedin']) {
 
 // Database connection
 $host = 'localhost';
-$dbname = 'restaurant';
-$username = 'root';
-$password = '';
+$dbname = 'cheapiza_fastfood';
+$username = 'cheapiza';
+$password = 'cheapz2026';
 $conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
@@ -192,7 +192,7 @@ include 'sidebar.php';
         <div class="profile-section">
             <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
             <div class="info">
-                <h3>Welcome Back!</h3>
+                <h3>Selamat Datang Kembali!</h3>
                 <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
             </div>
         </div>
@@ -200,15 +200,16 @@ include 'sidebar.php';
         <!-- Navigation Items -->
 
         <ul>
-            <li><a href="index.php" class="active"><i class="fas fa-chart-line"></i> Overview</a></li>
-            <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Menu Management</a></li>
-            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-            <!--<li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservations</a></li>-->
-            <!-- <li><a href="users.php"><i class="fas fa-users"></i> Users</a></li>-->
-            <li><a href="reviews.php"><i class="fas fa-star"></i> Reviews</a></li>
-            <!--<li><a href="staffs.php"><i class="fas fa-users"></i> Staffs</a></li>-->
-            <li><a href="profile.php"><i class="fas fa-user"></i> Profile Setting</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="index.php" class="active"><i class="fas fa-chart-line"></i> Ringkasan</a></li>
+            <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+            <li><a href="admin_orders.php"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
+            <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
+            <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li>
+            <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li>
+            <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
+            <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
         </ul>
     </div>
 
@@ -217,14 +218,14 @@ include 'sidebar.php';
             <button id="toggleSidebar" class="toggle-button">
                 <i class="fas fa-bars"></i>
             </button>
-            <h2><i class="fas fa-chart-line"></i> Overview</h2>
+            <h2><i class="fas fa-chart-line"></i> Ringkasan</h2>
         </div>
         <div class="container">
             <!-- Total Earning Card -->
             <div class="card" data-color="purple">
 
                 <div class="card-content">
-                    <h4>Total Earning</h4>
+                    <h4>Total Pendapatan</h4>
                     <h3>Rp <?php echo number_format($totalEarning); ?></h3>
                     <p class="<?php echo $totalEarningChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $totalEarningChange > 0 ? '▲' : '▼'; ?> <?php echo abs($totalEarningChange); ?>%
@@ -237,7 +238,7 @@ include 'sidebar.php';
             <!-- Today's Earning Card -->
             <div class="card" data-color="orange">
                 <div class="card-content">
-                    <h4>Today's Earning</h4>
+                    <h4>Pendapatan Hari Ini</h4>
                     <h3>Rp <?php echo number_format($todaysEarning); ?></h3>
                     <p class="<?php echo $todaysEarningChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $todaysEarningChange > 0 ? '▲' : '▼'; ?> <?php echo abs($todaysEarningChange); ?>%
@@ -250,7 +251,7 @@ include 'sidebar.php';
             <!-- Total Orders Card -->
             <div class="card" data-color="l-blue">
                 <div class="card-content">
-                    <h4>Total Orders</h4>
+                    <h4>Total Pesanan</h4>
                     <h3><?php echo number_format($totalOrders); ?></h3> <!-- Display total orders -->
                     <p class="<?php echo $totalOrdersChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $totalOrdersChange > 0 ? '▲' : '▼'; ?> <?php echo abs($totalOrdersChange); ?>%
@@ -263,7 +264,7 @@ include 'sidebar.php';
             <!-- Today's Orders Card -->
             <div class="card" data-color="pink">
                 <div class="card-content">
-                    <h4>Today's Orders</h4>
+                    <h4>Pesanan Hari Ini</h4>
                     <h3><?php echo number_format($todaysOrders); ?></h3> <!-- Display today's orders -->
                     <p class="<?php echo $todaysOrdersChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $todaysOrdersChange > 0 ? '▲' : '▼'; ?> <?php echo abs($todaysOrdersChange); ?>%
@@ -276,7 +277,7 @@ include 'sidebar.php';
             <!-- Total User Card -->
             <div class="card" data-color="blue">
                 <div class="card-content">
-                    <h4>Total Users</h4>
+                    <h4>Total Pengguna</h4>
                     <h3><?php echo number_format($totalUsers); ?></h3> <!-- Display total users -->
                     <p class="<?php echo $totalUsersChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $totalUsersChange > 0 ? '▲' : '▼'; ?> <?php echo abs($totalUsersChange); ?>%
@@ -289,7 +290,7 @@ include 'sidebar.php';
             <!-- Reservations Card -->
             <div class="card" data-color="green">
                 <div class="card-content">
-                    <h4>Total Reservations</h4>
+                    <h4>Total Reservasi</h4>
                     <h3><?php echo number_format($totalReservations); ?></h3> <!-- Display total reservations -->
                     <p class="<?php echo $totalReservationsChange > 0 ? 'positive' : 'negative'; ?>">
                         <?php echo $totalReservationsChange > 0 ? '▲' : '▼'; ?> <?php echo abs($totalReservationsChange); ?>%
@@ -306,9 +307,9 @@ include 'sidebar.php';
                 <?php
                 // Database connection (update with your actual connection details)
                 $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "restaurant";
+                $username = "cheapiza";
+                $password = "cheapz2026";
+                $dbname = "cheapiza_fastfood";
 
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -323,43 +324,52 @@ include 'sidebar.php';
         ORDER BY order_date DESC 
         LIMIT 6";
                 $result = $conn->query($sql);
-
+ 
                 // Check if there are results
                 if ($result->num_rows > 0) {
                     echo '<div class="latest-orders">';
-                    echo '<h2>Latest Orders</h2>';
+                    echo '<h2>Pesanan Terbaru</h2>';
                     echo '<table>';
                     echo '<thead>';
                     echo '<tr>';
-                    echo '<th>Order ID</th>';
-                    echo '<th>Customer Name</th>';
+                    echo '<th>ID Pesanan</th>';
+                    echo '<th>Nama Pelanggan</th>';
                     echo '<th>Status</th>';
-                    echo '<th>Total Amount</th>';
-                    echo '<th>Actions</th>';
+                    echo '<th>Total Jumlah</th>';
+                    echo '<th>Aksi</th>';
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-
+ 
                     // Output data for each row
                     while ($row = $result->fetch_assoc()) {
+                        // Translate status display
+                        $status_indonesian = $row["order_status"];
+                        switch($status_indonesian) {
+                            case 'Pending': $status_indonesian = 'Menunggu'; break;
+                            case 'Processing': $status_indonesian = 'Diproses'; break;
+                            case 'On the way': $status_indonesian = 'Sedang Dikirim'; break;
+                            case 'Completed': $status_indonesian = 'Selesai'; break;
+                            case 'Cancelled': $status_indonesian = 'Dibatalkan'; break;
+                        }
                         echo '<tr>';
                         echo '<td>' . htmlspecialchars($row["order_id"]) . '</td>';
                         echo '<td>' . htmlspecialchars($row["firstName"] . " " . $row["lastName"]) . '</td>';
-                        echo '<td>' . htmlspecialchars($row["order_status"]) . '</td>';
+                        echo '<td>' . htmlspecialchars($status_indonesian) . '</td>';
                         echo '<td>Rp ' . htmlspecialchars($row["grand_total"]) . '</td>';
                         echo '<td>';
-                        echo '<button onclick=\'viewDetails(' . $row['order_id'] . ')\'>View Details</button>';
+                        echo '<button onclick=\'viewDetails(' . $row['order_id'] . ')\'>Lihat Detail</button>';
                         echo '</td>';
                         echo '</tr>';
                     }
-
+ 
                     echo '</tbody>';
                     echo '</table>';
                     echo '</div>';
                 } else {
-                    echo "No orders found.";
+                    echo "Pesanan tidak ditemukan.";
                 }
-
+ 
                 $conn->close();
                 ?>
 
@@ -371,11 +381,11 @@ include 'sidebar.php';
         </div>
         <div class="review-container">
             <div id="chartContainer">
-                <h2>Earnings</h2>
+                <h2>Pendapatan</h2>
                 <canvas id="earningsChart"></canvas>
             </div>
             <div class="review-chart-container">
-                <h2>Ratings</h2>
+                <h2>Penilaian</h2>
                 <canvas id="ratingsLineChart"></canvas>
             </div>
         </div>
@@ -588,7 +598,16 @@ include 'sidebar.php';
             const statusCounts = <?php echo json_encode($statusCounts); ?>;
 
             // Prepare data
-            const labels = Object.keys(statusCounts);
+            const labels = Object.keys(statusCounts).map(status => {
+                switch(status) {
+                    case 'Pending': return 'Menunggu';
+                    case 'Processing': return 'Diproses';
+                    case 'On the Way': return 'Sedang Dikirim';
+                    case 'Completed': return 'Selesai';
+                    case 'Cancelled': return 'Dibatalkan';
+                    default: return status;
+                }
+            });
             const data = Object.values(statusCounts);
 
             // Create the bar chart
@@ -598,7 +617,7 @@ include 'sidebar.php';
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Order Statuses',
+                        label: 'Status Pesanan',
                         data: data,
                         backgroundColor: [
                             'rgba(60, 142, 245, 0.4)', // Blue
@@ -639,7 +658,7 @@ include 'sidebar.php';
                 const ratings = [1, 2, 3, 4, 5]; // Rating categories
                 const datasets = ratings.map(rating => {
                     return {
-                        label: `${rating} Star`,
+                        label: `Bintang ${rating}`,
                         data: labels.map(date => {
                             const entry = data.find(item => item.review_date === date && item.rating == rating);
                             return entry ? entry.count : 0;

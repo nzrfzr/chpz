@@ -1,35 +1,30 @@
-* {
+*{
   padding: 0;
   margin: 0;
 }
-
 body {
   background: #fef0e8;
   font-family: "Poppins", sans-serif;
   margin: 0;
 }
-
 .actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
   margin-top: 40px;
-
+  
 }
-
-.filter-orders {
+.filter-orders{
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-
+  
 }
-
-.content {
+.content{
   margin-bottom: 40px;
 }
-
 .actions select,
 .actions input {
   padding: 15px;
@@ -39,7 +34,6 @@ body {
   cursor: pointer;
   outline: none;
 }
-
 button {
   background-color: #fb4a36;
   color: white;
@@ -50,7 +44,6 @@ button {
   transition: all 0.3s ease;
   font-size: 1.2rem;
 }
-
 button:hover {
   background-color: #fbdac7;
   color: #fb4a36;
@@ -73,15 +66,13 @@ button:hover {
   color: #1d1818;
   transition: background-color 0.3s;
 }
-
 .sidebar ul li a.active {
-  background-color: #ee7149;
+background-color:#ee7149;
 }
 
 .sidebar ul li a:hover {
-  background-color: #f4a178;
+background-color: #f4a178;
 }
-
 .status {
   padding: 5px 10px;
   border-radius: 5px;
@@ -174,8 +165,7 @@ table tr:hover {
   color: #fb4a36;
   border: 1px solid #fb4a36;
 }
-
-#viewbtn {
+#viewbtn{
   padding: 4px 6px 4px 6px;
   font-size: 16px;
   border-radius: 4px;
@@ -187,23 +177,21 @@ table tr:hover {
   outline: none;
   transition: all 0.3s ease;
 }
-
 #refreshButton {
-  color: #fbdac7;
-  background-color: #fb4a36;
-  border: 2px solid #fb4a36;
-  cursor: pointer;
-  padding: 11px;
-  font-size: 1.4rem;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+color: #fbdac7;
+background-color: #fb4a36;
+border: 2px solid #fb4a36;
+cursor: pointer;
+padding: 11px;
+font-size: 1.4rem;
+border-radius: 5px;
+transition: all 0.3s ease;
 }
 
-#refreshButton:hover {
-  background: #fbdac7;
-  color: #fb4a36;
+#refreshButton:hover{
+    background: #fbdac7;
+    color: #fb4a36;
 }
-
 .modal {
   position: fixed;
   inset: 0;
@@ -278,7 +266,7 @@ table tr:hover {
   justify-content: space-between;
   align-items: center;
   border-bottom: rgba(165, 165, 165, 0.795) 1px solid;
-
+  
 }
 
 .modal-footer {
@@ -286,7 +274,7 @@ table tr:hover {
   justify-content: flex-end;
   align-items: center;
   border-top: rgba(165, 165, 165, 0.795) 1px solid;
-
+  
 }
 
 .modal-content {
@@ -355,7 +343,7 @@ table tr:hover {
 
 @media only screen and (min-width: 767px) and (max-width: 975px) {
   .modal-container {
-    width: 45rem;
-    height: 40rem;
+      width: 45rem;
+      height: 40rem;
   }
 }

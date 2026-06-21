@@ -1,8 +1,8 @@
 <?php
 // Establish a connection to the database
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "cheapiza";
+$password = "cheapz2026";
 $dbname = "cheapiza_fastfood";
 
 // Enable error reporting
