@@ -59,7 +59,7 @@ include 'sidebar.php';
     <div class="profile-section">
       <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
       <div class="info">
-        <h3>Welcome Back!</h3>
+        <h3>Selamat Datang Kembali!</h3>
         <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
       </div>
     </div>
