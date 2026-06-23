@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
 
 ?>
 <?php
-include 'sidebar.php';
+include 'includes/sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +29,8 @@ include 'sidebar.php';
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
  
-  <link rel="stylesheet" href="admin_user.css">
-  <link rel="stylesheet" href="sidebar.css">
+  <link rel="stylesheet" href="css/admin_user.css">
+  <link rel="stylesheet" href="css/sidebar.css">
  <style>
   .sidebar ul li a i {
   margin-right: 10px;
@@ -239,9 +239,9 @@ include 'sidebar.php';
     </div>
   </div>
   <?php
-    include_once ('footer.html');
+    include_once ('includes/footer.html');
     ?>
-  <script src="sidebar.js"></script>
+  <script src="js/sidebar.js"></script>
   <script>
     const modal = document.querySelector('.modal');
     const buttons = document.querySelectorAll('.toggleButton');

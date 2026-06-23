@@ -57,7 +57,7 @@ $result = $conn->query($query);
 
 ?>
 <?php
-include 'sidebar.php';
+include 'includes/sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -72,8 +72,8 @@ include 'sidebar.php';
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  <link rel="stylesheet" href="sidebar.css">
-  <link rel="stylesheet" href="admin_reservation.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin_reservation.css">
   <style>
   .content{
     margin-bottom: 40px;
@@ -89,7 +89,7 @@ include 'sidebar.php';
     <div class="profile-section">
       <img src="../uploads/<?php echo htmlspecialchars($admin_info['profile_image']); ?>" alt="Profile Picture">
       <div class="info">
-        <h3>Welcome Back!</h3>
+        <h3>Selamat Datang Kembali!</h3>
         <p><?php echo htmlspecialchars($admin_info['firstName']) . ' ' . htmlspecialchars($admin_info['lastName']); ?></p>
       </div>
     </div>
@@ -113,7 +113,7 @@ include 'sidebar.php';
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-calendar-alt"></i> Reservations</h2>
+      <h2><i class="fas fa-calendar-alt"></i> Reservasi</h2>
     </div>
     <div>
 
@@ -339,7 +339,7 @@ include 'sidebar.php';
 
 
 <?php
-    include_once ('footer.html');
+    include_once ('includes/footer.html');
     ?>
     <script>
       function openModal() {
@@ -472,7 +472,7 @@ function closeEditReservationModal() {
    
 
     </script>
-    <script src="sidebar.js"></script>
+    <script src="js/sidebar.js"></script>
 </body>
 
 </html>

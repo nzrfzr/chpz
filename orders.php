@@ -331,7 +331,7 @@ include 'db_connection.php';
 
 <body>
     <?php
-    include_once("nav-logged.php");
+    include_once("includes/nav-logged.php");
     ?>
     <div class="main-container">
         <div class="container-div">
@@ -399,7 +399,7 @@ include 'db_connection.php';
     </div>
    
     <?php
-include_once ('footer.html');
+include_once ('includes/footer.html');
 ?>
 
     <!-- Bootstrap JS -->

@@ -8,7 +8,7 @@ if (!isset($_SESSION['adminloggedin'])) {
 include 'db_connection.php';
 ?>
 <?php
-include 'sidebar.php';
+include 'includes/sidebar.php';
 ?>
 
 
@@ -25,9 +25,9 @@ include 'sidebar.php';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="admin_reservation.css">
-  <link rel="stylesheet" href="sidebar.css">
-  <link rel="stylesheet" href="admin_review.css">
+  <link rel="stylesheet" href="css/admin_reservation.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/admin_review.css">
 </head>
 
 <body>
@@ -184,7 +184,7 @@ include 'sidebar.php';
   </div>
 
   <?php
-    include_once ('footer.html');
+    include_once ('includes/footer.html');
     ?>
   <script>
    function updateStatus(order_id, status) {

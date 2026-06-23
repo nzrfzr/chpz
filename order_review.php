@@ -56,12 +56,12 @@ $total = $subtotal + $deliveryFee;
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="order_review.css">
+  <link rel="stylesheet" href="css/order_review.css">
   <title>Selesaikan Pesanan</title>
 </head>
 
 <body>
-  <?php include('nav-logged.php'); ?>
+  <?php include('includes/nav-logged.php'); ?>
   <div class="title mt-2">
     <h3>Halo <?php echo $user['firstName'] . " " . $user['lastName']; ?>, selesaikan pesanan Anda!</h3>
   </div>
@@ -200,7 +200,7 @@ $total = $subtotal + $deliveryFee;
   </div>
 
   <?php
-include_once ('footer.html');
+include_once ('includes/footer.html');
 ?>
 
   <!-- Bootstrap JS -->

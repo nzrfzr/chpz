@@ -60,16 +60,16 @@ $conn->close();
   <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="css/index.css">
   <title>Home</title>
 </head>
 
 <body>
   <?php
   if (isset($_SESSION['userloggedin']) && $_SESSION['userloggedin']) {
-    include 'nav-logged.php';
+    include 'includes/nav-logged.php';
   } else {
-    include 'navbar.php';
+    include 'includes/navbar.php';
   }
   ?>
 

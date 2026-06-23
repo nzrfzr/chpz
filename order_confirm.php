@@ -289,7 +289,7 @@ $orderItemsResult = $stmt->get_result();
 </head>
 
 <body>
-    <?php include('nav-logged.php'); ?>
+    <?php include('includes/nav-logged.php'); ?>
     <div class="title d-flex justify-content-center align-items-center">
         <div id="wrapper">
             <div class="card" style="background: rgba(255, 99, 132, 0.3);">
@@ -355,7 +355,7 @@ $orderItemsResult = $stmt->get_result();
     </div>
 
     <?php
-include_once ('footer.html');
+include_once ('includes/footer.html');
 ?>
 
 <script>

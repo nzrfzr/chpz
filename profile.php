@@ -85,7 +85,7 @@ $user_info = getUserInfo($user_email);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css' />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="css/profile.css">
   <style>
     @media screen and (max-width: 700px) {
         .form-row{
@@ -111,9 +111,9 @@ $user_info = getUserInfo($user_email);
   <?php
 
   if (isset($_SESSION['userloggedin']) && $_SESSION['userloggedin']) {
-    include 'nav-logged.php';
+    include 'includes/nav-logged.php';
   } else {
-    include 'navbar.php';
+    include 'includes/navbar.php';
   }
   ?>
 
@@ -168,7 +168,7 @@ $user_info = getUserInfo($user_email);
   </div>
 
   <?php
-include_once ('footer.html');
+include_once ('includes/footer.html');
 ?>
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
