@@ -129,6 +129,10 @@ $itemsResult = $stmt->get_result();
           <input type="radio" id="card" name="payment_mode" value="Card">
           <label for="Card">Transfer (QRIS)</label>
         </div>
+        <div>
+          <input type="radio" id="midtrans" name="payment_mode" value="Midtrans">
+          <label for="midtrans">Pembayaran Online (Midtrans)</label>
+        </div>
       </div>
       <div class="summary-details">
         <p><strong>Biaya Pengiriman: </strong></p>

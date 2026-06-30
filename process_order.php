@@ -118,8 +118,12 @@ try {
     // Commit transaction
     $conn->commit();
 
-    // Redirect to confirmation page with the order ID
-    header('Location: order_confirm.php?order_id=' . $orderId);
+    // Redirect to confirmation or payment page with the order ID
+    if ($paymentMode === 'Midtrans') {
+        header('Location: midtrans_payment.php?order_id=' . $orderId);
+    } else {
+        header('Location: order_confirm.php?order_id=' . $orderId);
+    }
     exit;
 
 } catch (Exception $e) {

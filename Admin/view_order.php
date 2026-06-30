@@ -85,11 +85,9 @@ include 'includes/sidebar.php';
       <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
       <li><a href="admin_orders.php" class="active"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
       <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
-      <!-- <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li> -->
-      <!-- <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li> -->
       <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
-      <!-- <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li> -->
       <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
+      <li><a href="settings.php"><i class="fas fa-cog"></i> Pengaturan Midtrans</a></li>
       <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
     </ul>
   </div>
@@ -163,6 +161,8 @@ include 'includes/sidebar.php';
                   echo 'Ambil di tempat';
               } elseif ($order['pmode'] === 'Cash') {
                   echo 'Tunai (Cash)';
+              } elseif ($order['pmode'] === 'Midtrans') {
+                  echo 'Midtrans (Online)';
               } else {
                   echo htmlspecialchars($order['pmode']);
               }
