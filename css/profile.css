@@ -120,6 +120,7 @@ h2 {
     flex-direction: column;
     gap: 0;
   }
+
   .form-container {
     margin: 40px 20px !important;
     width: 100%;

@@ -284,8 +284,8 @@ include 'includes/sidebar.php';
     <!-- View Categories Modal -->
     <div class="modal" id="viewCategoryModal">
         <div class="modal-overlay"></div>
-        <div class="modal-container" style="background: #fef0e8;">
-            <div class="modal-header" style=" border-bottom: 1px solid #ffc9b3">
+        <div class="modal-container">
+            <div class="modal-header">
                 <h2>Kategori</h2>
                 <span class="close-icon" onclick="closeViewCategoryModal()">&times;</span>
             </div>
@@ -317,7 +317,7 @@ include 'includes/sidebar.php';
                     </table>
                 </div>
             </div>
-            <div class="modal-footer" style="border-top: 1px solid #ffc9b3">
+            <div class="modal-footer">
                 <button type="button" class="button" onclick="closeViewCategoryModal()">Tutup</button>
             </div>
         </div>

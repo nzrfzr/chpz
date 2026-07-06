@@ -24,7 +24,7 @@ include 'db_connection.php';
             font-family: Arial, sans-serif;
             margin: 0;
             padding-top: 100px;
-            background: #fef0e8;
+            background: #ffffff;
         }
 
         .tabs {
