@@ -1,15 +1,15 @@
-*{
+* {
   margin: 0;
   padding: 0;
-
+  box-sizing: border-box;
 }
 
 body {
-  font-family: poppins, sans-serif;
-  background-color: #feead4;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
   margin: 0;
-  padding-top: 100px;
- 
+  padding-top: 130px;
+  color: #1e293b;
 }
 
 .wrapper {
@@ -17,16 +17,14 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
-  
 }
 
 .form-container {
-  background-color: rgba(253, 108, 77, 0.1);
-  border-color: rgba(253, 108, 77, 0.5);
-  box-shadow: 2px 2px 5px rgba(253, 108, 77, 0.7);
-  padding: 10px 20px 20px 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(253, 108, 77, 0.5);
+  background-color: #ffffff;
+  border: 1px solid rgba(220, 38, 38, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  border-radius: 16px;
   width: 600px;
 }
 
@@ -34,88 +32,96 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 15px;
 }
 
 .form-group {
   position: relative;
   flex: 1;
-  margin-right: 10px;
-}
-
-.form-group:last-child {
-  margin-right: 0;
 }
 
 .form-group label {
   position: absolute;
-  top: 12px;
-  left: 5px;
-  padding: 0 5px;
-  font-weight: bold;
-  color: #333;
-  transition: 0.2s;
+  top: 15px;
+  left: 15px;
+  font-weight: 700;
+  color: #475569;
   pointer-events: none;
-  /* Allow clicking through the label */
+  font-size: 0.9rem;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="file"] {
   width: 100%;
-  padding: 15px 15px 15px 15px;
-  /* Extra padding to accommodate label */
-  margin-bottom: 10px;
-  border: 1px solid rgba(253, 108, 77, 0.8);
-  background-color: rgba(253, 108, 77, 0.2);
-  border-radius: 4px;
-  box-sizing: border-box;
-  position: relative;
+  padding: 15px 15px 15px 100px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  border-radius: 8px;
   text-align: right;
   font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+  outline: none;
+  border-color: #dc2626;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
 .form-group input[type="file"] {
-  padding: 13px 15px 13px 15px;
+  padding: 13px 15px 13px 100px;
 }
 
 form button {
   width: 100%;
-  padding: 10px;
-  background-color: #fb4a36;
+  padding: 14px;
+  background-color: #dc2626;
   color: white;
-  border: 2px solid #fb4a36;
-  border-radius: 4px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
 }
 
 form button:hover {
-  background-color: #fbdac7;
-  color: #fb4a36;
-  border: 2px solid #fb4a36;
+  background-color: #eab308;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
 }
 
 .profile-image {
   display: block;
-  margin: 15px auto 20px auto;
+  margin: 15px auto 25px auto;
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid #eab308;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-h2{
+h2 {
   text-align: center;
-  
+  font-weight: 800;
+  color: #dc2626;
+  margin-bottom: 20px;
+  font-size: 2rem;
 }
+
 @media screen and (max-width: 700px) {
-  .form-row{
-    display: flex;
-    flex-direction: column !important;
+  .form-row {
+    flex-direction: column;
+    gap: 0;
   }
-  .form-container{
-    margin: 40px 30px 40px 30px !important;
-   
+  .form-container {
+    margin: 40px 20px !important;
+    width: 100%;
   }
 }

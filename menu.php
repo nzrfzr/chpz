@@ -40,14 +40,11 @@ while ($row = $categoryResult->fetch_assoc()) {
         }
 
         section:nth-child(odd) {
-            background-color: #ffe4c2;
-
-            /* Set background color for odd sections */
+            background-color: #ffffff;
         }
 
         section:nth-child(even) {
-            background-color: #feead4;
-            /* Set background color for even sections */
+            background-color: #ffffff;
         }
     </style>
 </head>
@@ -79,7 +76,7 @@ while ($row = $categoryResult->fetch_assoc()) {
                         $buttonClass = $row['status'] == 'Unavailable' ? 'disabled-button' : '';
                     ?>
                         <div class="col-md-6 col-lg-3 col-sm-12 menu-item col-xs-12">
-                            <div class=" mt-4" style="background-color: #fdd9c9; border-radius: 5px;">
+                            <div class="card mt-4">
                                 <img src="uploads/<?= $row['image'] ?>" alt="image" class="card-img-top" height="250">
                                 <div class="card-body">
                                     <h4 class="card-title text-center mt-3"><?= $row['itemName'] ?></h4>
@@ -115,7 +112,7 @@ while ($row = $categoryResult->fetch_assoc()) {
         </section>
     <?php endforeach; ?>
     <!-- Toast Notification Container -->
-    <div id="toast" class="toast" style="background: rgba(255, 182, 182, 0.9); border: 1px solid rgba(255, 182, 182, 1); font-size: 16px;">
+    <div id="toast" class="toast">
         <button class="toast-btn toast-close">&times;</button>
         <span class="pt-3"><strong>Anda harus masuk terlebih dahulu untuk menambah item ke keranjang.</strong></span><br>
         <button class="toast-btn toast-ok">Oke</button>

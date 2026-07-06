@@ -1,13 +1,15 @@
-*{
+* {
   margin: 0;
   padding: 0;
-}
-body {
-  background: #fef0e8;
-  font-family: "Poppins", sans-serif;
-  margin: 0;
+  box-sizing: border-box;
 }
 
+body {
+  background: #ffffff;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  color: #1e293b;
+}
 
 .content {
   flex: 1;
@@ -15,14 +17,13 @@ body {
   margin-bottom: 40px;
 }
 
-
 .row {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 }
 
-.row>* {
+.row > * {
   flex: 1 1 200px;
   margin-bottom: 20px;
 }
@@ -53,7 +54,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
   z-index: 997;
   opacity: 0;
   visibility: hidden;
@@ -69,14 +71,15 @@ body {
   position: absolute;
   width: 50rem;
   height: 35rem;
-  border-radius: 7px;
+  border-radius: 16px;
   z-index: 998;
   background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  transform: scale(0.8);
+  transform: scale(0.9);
   transition: all 0.3s ease;
+  border: 1px solid rgba(220, 38, 38, 0.15);
 }
 
 .modal.open .modal-container {
@@ -92,234 +95,247 @@ body {
 
 .modal-header,
 .modal-footer {
-  flex: 0 0 10%;
-  padding: 10px 30px;
+  flex: 0 0 12%;
+  padding: 15px 30px;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: rgba(165, 165, 165, 0.795) 1px solid;
-  
+  border-bottom: #cbd5e1 1px solid;
+}
+
+.modal-header h3 {
+  font-weight: 800;
+  color: #dc2626;
 }
 
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-top: rgba(165, 165, 165, 0.795) 1px solid;
-  
+  border-top: #cbd5e1 1px solid;
+  gap: 10px;
 }
 
 .modal-content {
   flex: 1;
   overflow: auto;
-  padding: 25px;
+  padding: 30px;
 }
 
 .modal-content::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
   height: 8px;
   background-color: #fff;
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-  background-color: rgba(37, 37, 37, 0.788);
+  background-color: #94a3b8;
+  border-radius: 4px;
 }
 
 .close-icon {
-  font-size: 40px;
+  font-size: 30px;
   cursor: pointer;
+  color: #64748b;
+  transition: color 0.2s;
+}
+
+.close-icon:hover {
+  color: #dc2626;
 }
 
 .input-group {
   position: relative;
-  margin-bottom: 10px;
-
+  margin-bottom: 20px;
 }
 
 .input {
   width: 100%;
-  border: solid 1.5px #000;
-  border-radius: 7px;
-  background: none;
-  padding: 15px;
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 15px;
+  border: solid 1.5px #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e293b;
+  transition: all 0.2s ease;
 }
 
 .label {
   position: absolute;
-
   left: 15px;
-  color: #000;
+  color: #64748b;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   pointer-events: none;
-  transform: translateY(15px);
+  transform: translateY(14px);
   transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.input:focus,
-.input:valid {
+.input:focus {
   outline: none;
+  border-color: #dc2626;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
-.input:focus~.label,
-.input:valid~.label {
-  transform: translateX(-10px) translateY(-50%) scale(0.8);
+.input:focus ~ .label,
+.input:valid ~ .label,
+.input:not(:placeholder-shown) ~ .label {
+  transform: translateX(-10px) translateY(-50%) scale(0.85);
   background-color: #fff;
-  padding: 0.2em;
+  padding: 0 5px;
+  color: #dc2626;
+  font-weight: 700;
 }
-
-
 
 @media only screen and (min-width: 767px) and (max-width: 975px) {
   .modal-container {
-      width: 45rem;
-      height: 40rem;
+    width: 45rem;
+    height: 40rem;
   }
 }
 
 @media (max-width: 767px) {
   .modal-container {
-      width: 20rem;
-      height: 35rem;
+    width: 90%;
+    height: 38rem;
   }
 }
 
-
 table {
   width: 100%;
-  border: 2px solid #ffc9b3;
-  font-size: 17px;
+  border: 1px solid rgba(220, 38, 38, 0.15);
+  font-size: 15px;
   text-align: center;
-  cursor: pointer;
-  border-radius: 5px;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
 table th,
 table td {
-  padding: 12px 15px;
-  border: 2px solid #ffc9b3;
-  border-radius: 5px;
-
+  padding: 14px;
+  border: 1px solid #f1f5f9;
 }
 
 table th {
-  background-color: #fdd9c9;
-}
-
-table tr:nth-of-type(even) {
-  background-color: #fce9e2;
+  background-color: #fefce8;
+  color: #dc2626;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(220, 38, 38, 0.1);
 }
 
 table tr:hover {
-  background-color: #fdd9c9;
+  background-color: #fefce8;
 }
-
-.header {
-  padding: 10px;
-  background-color: #fbdac7;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-
-
 
 .modal-row {
-  margin: 40px 0 20px 0;
+  margin: 20px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
 }
 
-
-
 .search-bar button {
-  background-color: #fb4a36;
+  background-color: #dc2626;
   border: none;
-  padding: 13px;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .search-bar button:hover {
-  background-color: #fbdac7;
-  color: #fb4a36;
+  background-color: #eab308;
 }
 
 #editbtn,
 #deletebtn {
-  font-size: 20px;
+  font-size: 18px;
   background: none;
   border: none;
-  padding: 0 0 0 0;
   outline: none;
   cursor: pointer;
-  padding: 0 5px 0 5px;
+  padding: 5px;
+  transition: transform 0.2s;
 }
 
 #editbtn {
-  color: green;
+  color: #10b981;
 }
 
 #deletebtn {
-  color: red;
+  color: #ef4444;
 }
 
 #editbtn:hover,
 #deletebtn:hover {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
-.search-bar select,
-.search-bar button {
-  padding: 13px 10px;
+.search-bar select {
+  padding: 12px 15px;
   margin-right: 10px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  border: 2px solid #f4a178;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
   cursor: pointer;
   outline: none;
 }
+
 button {
-  background-color: #fb4a36;
+  background-color: #dc2626;
   color: white;
-  border: 2px solid #fb4a36;
-  padding: 13px 20px;
+  border: none;
+  padding: 12px 24px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
 }
+
 button:hover {
-  background-color: #fbdac7;
-  color: #fb4a36;
-  border: 2px solid #fb4a36;
+  background-color: #eab308;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
 }
-.button{
-  padding: 10px 30px;
-  border-radius: 20px;
-  background-color: #fbdac7;
+
+.button {
+  padding: 10px 24px;
+  border-radius: 50px;
+  background-color: #fefce8;
   margin-left: 10px;
-  font-size: 16px;
-  color: #fb4a36;
-  border: 2px solid #fb4a36;
-  font-weight: 450;
+  font-size: 14px;
+  color: #dc2626;
+  border: 2px solid #dc2626;
+  font-weight: 600;
   cursor: pointer;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }
-.button:hover{
-  background-color: #fb4a36;
-  color: #fbdac7;
- 
+
+.button:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
 }
+
 .toggler {
   width: 72px;
-  margin: 40px auto;
+  margin: 10px auto;
 }
 
 .toggler input {
@@ -331,111 +347,47 @@ button:hover {
   position: relative;
   width: 72px;
   height: 36px;
-  border: 1px solid #d6d6d6;
+  border: 1px solid #cbd5e1;
   border-radius: 36px;
-  background: #e4e8e8;
+  background: #e2e8f0;
   cursor: pointer;
 }
 
 .toggler label::after {
   display: block;
-  border-radius: 100%;
-  background-color: #d7062a;
+  border-radius: 50%;
+  background-color: #ef4444;
   content: '';
-  animation-name: toggler-size;
-  animation-duration: 0.15s;
-  animation-timing-function: ease-out;
-  animation-direction: forwards;
-  animation-iteration-count: 1;
-  animation-play-state: running;
-}
-
-.toggler label::after,
-.toggler label .toggler-on,
-.toggler label .toggler-off {
   position: absolute;
   top: 50%;
-  left: 25%;
-  width: 26px;
-  height: 26px;
-  transform: translateY(-50%) translateX(-50%);
-  transition: left 0.15s ease-in-out, background-color 0.2s ease-out, width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s ease-in-out;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  transition: all 0.2s ease;
 }
 
-.toggler input:checked+label::after,
-.toggler input:checked+label .toggler-on,
-.toggler input:checked+label .toggler-off {
-  left: 75%;
+.toggler input:checked + label {
+  background-color: #fefce8;
+  border-color: #eab308;
 }
 
-.toggler input:checked+label::after {
-  background-color: #50ac5d;
-  animation-name: toggler-size2;
-}
-
-.toggler .toggler-on,
-.toggler .toggler-off {
-  opacity: 1;
-  z-index: 2;
-}
-
-.toggler input:checked+label .toggler-off,
-.toggler input:not(:checked)+label .toggler-on {
-  width: 0;
-  height: 0;
-  opacity: 0;
-}
-
-.toggler .path {
-  fill: none;
-  stroke: #fefefe;
-  stroke-width: 7px;
-  stroke-linecap: round;
-  stroke-miterlimit: 10;
-}
-
-@keyframes toggler-size {
-
-  0%,
-  100% {
-      width: 26px;
-      height: 26px;
-  }
-
-  50% {
-      width: 20px;
-      height: 20px;
-  }
-}
-
-@keyframes toggler-size2 {
-
-  0%,
-  100% {
-      width: 26px;
-      height: 26px;
-  }
-
-  50% {
-      width: 20px;
-      height: 20px;
-  }
+.toggler input:checked + label::after {
+  left: calc(100% - 32px);
+  background-color: #10b981;
 }
 
 #delete-btn {
-  font-size: 20px;
+  font-size: 18px;
   background: none;
   border: none;
-  padding: 0 0 0 0;
   outline: none;
   cursor: pointer;
-  padding: 0 5px 0 5px;
-}
-
-#delete-btn {
-  color: red;
+  padding: 5px;
+  color: #ef4444;
+  transition: transform 0.2s;
 }
 
 #delete-btn:hover {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
