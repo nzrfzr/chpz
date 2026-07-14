@@ -80,7 +80,7 @@ while ($row = $categoryResult->fetch_assoc()) {
                                 <img src="uploads/<?= $row['image'] ?>" alt="image" class="card-img-top" height="250">
                                 <div class="card-body">
                                     <h4 class="card-title text-center mt-3"><?= $row['itemName'] ?></h4>
-                                    <p class="card-title text-center description ps-3 pe-3 pt-2 pb-3"><?= $row['description'] ?></p>
+                                    <p class="card-title text-center description ps-3 pe-3 pt-2 pb-3" style="font-weight: 500; font-size: 15px;"><?= $row['description'] ?></p>
                                     <?php if ($row['status'] == 'Unavailable') : ?>
                                         <p class="card-status" style="color: red; text-align: center; font-size: 1.3em;">Tidak Tersedia</p>
                                     <?php endif; ?>
