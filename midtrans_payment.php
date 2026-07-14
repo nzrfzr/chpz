@@ -210,7 +210,11 @@ if ($http_code === 201 || $http_code === 200) {
                 xhr.open('POST', 'update_payment_midtrans.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.onload = function() {
-                    window.location.href = "order_confirm.php?order_id=<?php echo $orderId; ?>";
+                    if (status === 'success') {
+                        window.location.href = "order_confirm.php?order_id=<?php echo $orderId; ?>";
+                    } else {
+                        window.location.href = "orders.php";
+                    }
                 };
                 xhr.send('order_id=<?php echo $orderId; ?>&status=' + status);
             }

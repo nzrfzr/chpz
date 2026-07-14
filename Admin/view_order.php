@@ -231,10 +231,15 @@ include 'includes/sidebar.php';
             <p><strong>Alamat:</strong></p>
             <p><?php echo $order['address']; ?></p>
           </div>
+          <?php 
+          $showNote = !($order['pmode'] === 'Midtrans' && $order['payment_status'] !== 'Successful');
+          if ($showNote): 
+          ?>
           <div class="summary-details">
             <p><strong>Catatan Pesanan:</strong></p>
             <p><?php echo $order['note']; ?></p>
           </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>

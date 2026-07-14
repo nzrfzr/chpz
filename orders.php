@@ -507,10 +507,12 @@ include_once ('includes/footer.html');
                                     <div><p><strong>Tanggal Pesanan: </strong></p></div>
                                     <div><p>${new Date(order.order_date).toLocaleString()}</p></div>
                                 </div>
+                                ${!(order.pmode === 'Midtrans' && order.payment_status !== 'Successful') ? `
                                 <div class="customer-details">
                                     <div><p><strong>Catatan Pesanan: </strong></p></div>
                                     <div><p>${order.note || 'Null'}</p></div>
                                 </div>
+                                ` : ''}
                             </div>
                             <div class="order-items" style="font-size: 1.1rem;">
                                 ${order.items.map(item => `
@@ -526,6 +528,9 @@ include_once ('includes/footer.html');
                         <div><p>${order.cancel_reason}</p></div>
                         </div>` : ''}
                     </div>
+                   ${order.pmode === 'Midtrans' && order.payment_status !== 'Successful' && order.order_status !== 'Cancelled' ? `
+                       <button class="btn btn-primary mr-2" onclick="window.location.href='midtrans_payment.php?order_id=${order.order_id}'" style="background-color: #007bff !important; border-color: #007bff !important; color: white !important;">Lanjutkan Pembayaran</button>
+                   ` : ''}
                    ${order.order_status !== 'Completed' && order.order_status !== 'Cancelled' ? `<button class="cancel-btn" onclick="openCancelModal(${order.order_id})">Batalkan Pesanan</button>` : ''}
                     ${(order.order_status === 'Completed' || order.order_status === 'Cancelled') && !order.review_text ? `
                         <button class="review-btn" onclick="openReviewModal(${order.order_id})">Tulis Ulasan</button>

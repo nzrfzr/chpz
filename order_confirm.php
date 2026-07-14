@@ -25,6 +25,11 @@ if ($order === null) {
     die('Order not found.');
 }
 
+if ($order['pmode'] === 'Midtrans' && $order['payment_status'] !== 'Successful') {
+    header('Location: orders.php');
+    exit;
+}
+
 // Fetch order items
 $stmt = $conn->prepare('SELECT * FROM order_items WHERE order_id=?');
 if ($stmt === false) {

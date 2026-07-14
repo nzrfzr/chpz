@@ -43,11 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $merchant_id = $_POST['midtrans_merchant_id'] ?? '';
   $client_key = $_POST['midtrans_client_key'] ?? '';
   $server_key = $_POST['midtrans_server_key'] ?? '';
+  $environment = $_POST['midtrans_environment'] ?? 'sandbox';
 
   $keys = [
     'midtrans_merchant_id' => $merchant_id,
     'midtrans_client_key' => $client_key,
-    'midtrans_server_key' => $server_key
+    'midtrans_server_key' => $server_key,
+    'midtrans_environment' => $environment
   ];
 
   foreach ($keys as $key_name => $key_val) {
@@ -62,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Fetch current Midtrans credentials from DB
 $settings = [];
-$result = $conn->query("SELECT key_name, key_value FROM settings WHERE key_name IN ('midtrans_merchant_id', 'midtrans_client_key', 'midtrans_server_key')");
+$result = $conn->query("SELECT key_name, key_value FROM settings WHERE key_name IN ('midtrans_merchant_id', 'midtrans_client_key', 'midtrans_server_key', 'midtrans_environment')");
 if ($result) {
   while ($row = $result->fetch_assoc()) {
     $settings[$row['key_name']] = $row['key_value'];
@@ -72,6 +74,7 @@ if ($result) {
 $current_merchant_id = $settings['midtrans_merchant_id'] ?? '';
 $current_client_key = $settings['midtrans_client_key'] ?? '';
 $current_server_key = $settings['midtrans_server_key'] ?? '';
+$current_environment = $settings['midtrans_environment'] ?? 'sandbox';
 ?>
 
 <!DOCTYPE html>
@@ -97,10 +100,27 @@ $current_server_key = $settings['midtrans_server_key'] ?? '';
       color: #333;
       text-align: left;
     }
-    .form-group input[type="text"] {
+    .form-group input[type="text"],
+    .form-group select {
       text-align: left;
       font-family: monospace;
       padding: 12px 15px;
+      width: 100%;
+      border: 1px solid rgba(253, 108, 77, 0.8);
+      background-color: rgba(253, 108, 77, 0.2);
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+    .form-group select {
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
     }
     .alert-success {
       background-color: #d4edda;
@@ -167,6 +187,14 @@ $current_server_key = $settings['midtrans_server_key'] ?? '';
         <?php endif; ?>
 
         <form action="settings.php" method="post">
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="midtrans_environment">Environment Mode:</label>
+            <select id="midtrans_environment" name="midtrans_environment">
+              <option value="sandbox" <?php if ($current_environment === 'sandbox') echo 'selected'; ?>>Sandbox (Testing)</option>
+              <option value="production" <?php if ($current_environment === 'production') echo 'selected'; ?>>Production (Live)</option>
+            </select>
+          </div>
+
           <div class="form-group" style="margin-bottom: 20px;">
             <label for="midtrans_merchant_id">Merchant ID:</label>
             <input type="text" id="midtrans_merchant_id" name="midtrans_merchant_id" value="<?php echo htmlspecialchars($current_merchant_id); ?>" required placeholder="Masukkan Merchant ID (Contoh: M062856260)">
