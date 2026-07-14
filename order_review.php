@@ -39,7 +39,14 @@ foreach ($itemDetails as $item) {
   $itemQuantity = $item['quantity'];
   $subtotal += $itemPrice * $itemQuantity;
 }
-$deliveryFee = ($_POST['payment_mode'] === 'Takeaway') ? 0 : 1000;
+// Fetch shipping fee from database settings
+$shippingFee = 1000; // fallback default
+$shippingQuery = $conn->query("SELECT key_value FROM settings WHERE key_name = 'shipping_fee'");
+if ($shippingQuery && $row = $shippingQuery->fetch_assoc()) {
+    $shippingFee = intval($row['key_value']);
+}
+
+$deliveryFee = ($_POST['payment_mode'] === 'Takeaway') ? 0 : $shippingFee;
 $total = $subtotal + $deliveryFee;
 
 

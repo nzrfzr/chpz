@@ -39,10 +39,17 @@ if ($orderId) {
   echo "Invalid order ID.";
   exit();
 }
+// Fetch shipping fee from database settings
+$shippingFee = 1000; // fallback default
+$shippingQuery = $conn->query("SELECT key_value FROM settings WHERE key_name = 'shipping_fee'");
+if ($shippingQuery && $row = $shippingQuery->fetch_assoc()) {
+    $shippingFee = intval($row['key_value']);
+}
+
 $paymentMode = $order['pmode'] ?? 'takeaway'; // Default to 'takeaway' if not set
 
 // Determine the delivery fee based on the payment mode
-$deliveryFee = (strcasecmp($paymentMode, 'takeaway') === 0) ? 0 : 1000;
+$deliveryFee = (strcasecmp($paymentMode, 'takeaway') === 0) ? 0 : $shippingFee;
 ?>
 <?php
 include 'includes/sidebar.php';

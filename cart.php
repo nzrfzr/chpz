@@ -23,6 +23,13 @@ $stmt = $conn->prepare('SELECT * FROM cart WHERE email=?');
 $stmt->bind_param('s', $email);
 $stmt->execute();
 $itemsResult = $stmt->get_result();
+
+// Fetch shipping fee from database settings
+$shippingFee = 1000; // fallback default
+$shippingQuery = $conn->query("SELECT key_value FROM settings WHERE key_name = 'shipping_fee'");
+if ($shippingQuery && $row = $shippingQuery->fetch_assoc()) {
+    $shippingFee = intval($row['key_value']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -191,10 +198,13 @@ $itemsResult = $stmt->get_result();
         totalElement.textContent = (subtotal + deliveryFee).toFixed(2);
       }
 
+      // Pass shipping fee from PHP to JS
+      const dbShippingFee = <?php echo $shippingFee; ?>;
+
       // Function to update delivery fee based on payment mode
       function updateDeliveryFee() {
         const selectedPaymentMode = document.querySelector('input[name="payment_mode"]:checked').value;
-        deliveryFee = selectedPaymentMode === 'Takeaway' ? 0 : 1000;
+        deliveryFee = selectedPaymentMode === 'Takeaway' ? 0 : dbShippingFee;
         updateSummary();
       }
 

@@ -44,12 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $client_key = $_POST['midtrans_client_key'] ?? '';
   $server_key = $_POST['midtrans_server_key'] ?? '';
   $environment = $_POST['midtrans_environment'] ?? 'sandbox';
+  $shipping_fee = $_POST['shipping_fee'] ?? '1000';
 
   $keys = [
     'midtrans_merchant_id' => $merchant_id,
     'midtrans_client_key' => $client_key,
     'midtrans_server_key' => $server_key,
-    'midtrans_environment' => $environment
+    'midtrans_environment' => $environment,
+    'shipping_fee' => $shipping_fee
   ];
 
   foreach ($keys as $key_name => $key_val) {
@@ -59,12 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
   }
   
-  $success_message = 'Pengaturan Midtrans berhasil diperbarui!';
+  $success_message = 'Pengaturan berhasil diperbarui!';
 }
 
-// Fetch current Midtrans credentials from DB
+// Fetch current credentials and settings from DB
 $settings = [];
-$result = $conn->query("SELECT key_name, key_value FROM settings WHERE key_name IN ('midtrans_merchant_id', 'midtrans_client_key', 'midtrans_server_key', 'midtrans_environment')");
+$result = $conn->query("SELECT key_name, key_value FROM settings WHERE key_name IN ('midtrans_merchant_id', 'midtrans_client_key', 'midtrans_server_key', 'midtrans_environment', 'shipping_fee')");
 if ($result) {
   while ($row = $result->fetch_assoc()) {
     $settings[$row['key_name']] = $row['key_value'];
@@ -75,6 +77,7 @@ $current_merchant_id = $settings['midtrans_merchant_id'] ?? '';
 $current_client_key = $settings['midtrans_client_key'] ?? '';
 $current_server_key = $settings['midtrans_server_key'] ?? '';
 $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
+$current_shipping_fee = $settings['shipping_fee'] ?? '1000';
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +86,7 @@ $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pengaturan Midtrans</title>
+  <title>Pengaturan Aplikasi</title>
   <!-- poppins font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,6 +104,7 @@ $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
       text-align: left;
     }
     .form-group input[type="text"],
+    .form-group input[type="number"],
     .form-group select {
       text-align: left;
       font-family: monospace;
@@ -160,7 +164,7 @@ $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
       <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
       <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
       <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
-      <li><a href="settings.php" class="active"><i class="fas fa-cog"></i> Pengaturan Midtrans</a></li>
+      <li><a href="settings.php" class="active"><i class="fas fa-cog"></i> Pengaturan Toko</a></li>
       <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
     </ul>
   </div>
@@ -170,14 +174,14 @@ $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-cog"></i> Pengaturan Midtrans</h2>
+      <h2><i class="fas fa-cog"></i> Pengaturan Toko & Integrasi</h2>
     </div>
     
     <div class="wrapper">
       <div class="container" style="width: 650px;">
-        <h3 style="text-align: center; margin-bottom: 20px; color: #fb4a36;"><i class="fas fa-key"></i> Kunci Integrasi Midtrans</h3>
+        <h3 style="text-align: center; margin-bottom: 20px; color: #fb4a36;"><i class="fas fa-sliders-h"></i> Pengaturan Aplikasi</h3>
         <p style="font-size: 0.9rem; color: #666; margin-bottom: 25px; text-align: center; line-height: 1.5;">
-          Masukkan kredensial Midtrans di bawah ini. Pengaturan ini disimpan secara aman di database lokal Anda dan tidak akan terunggah ke Git.
+          Atur parameter toko Anda seperti biaya pengantaran dan kredensial gerbang pembayaran online Midtrans secara aman.
         </p>
 
         <?php if (!empty($success_message)): ?>
@@ -187,6 +191,15 @@ $current_environment = $settings['midtrans_environment'] ?? 'sandbox';
         <?php endif; ?>
 
         <form action="settings.php" method="post">
+          <h5 style="border-bottom: 1px solid rgba(253, 108, 77, 0.4); padding-bottom: 8px; margin-bottom: 15px; font-weight: 600; color: #333;"><i class="fas fa-shipping-fast"></i> Pengiriman & Tarif</h5>
+          
+          <div class="form-group" style="margin-bottom: 25px;">
+            <label for="shipping_fee">Biaya Pengantaran (Ongkir) (Rp):</label>
+            <input type="number" id="shipping_fee" name="shipping_fee" value="<?php echo htmlspecialchars($current_shipping_fee); ?>" required min="0" placeholder="Masukkan Biaya Pengiriman (Contoh: 1000)">
+          </div>
+
+          <h5 style="border-bottom: 1px solid rgba(253, 108, 77, 0.4); padding-bottom: 8px; margin-bottom: 15px; font-weight: 600; color: #333; margin-top: 10px;"><i class="fas fa-key"></i> Kredensial Midtrans</h5>
+
           <div class="form-group" style="margin-bottom: 20px;">
             <label for="midtrans_environment">Environment Mode:</label>
             <select id="midtrans_environment" name="midtrans_environment">
