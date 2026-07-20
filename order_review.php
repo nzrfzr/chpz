@@ -113,21 +113,7 @@ $total = $subtotal + $deliveryFee;
           <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
         </div>
 
-        <?php if (($_POST['payment_mode'] ?? '') === 'Card'): ?>
-          <div class="form-group p-3 border rounded bg-light text-center mt-3 shadow-sm">
-            <h5 class="mb-2" style="font-weight: 600; color: #fb4a36;"><i class="fas fa-qrcode"></i> Pembayaran QRIS</h5>
-            <p class="text-muted small mb-3">Silakan scan kode QRIS di bawah ini untuk membayar total pesanan Anda sebesar <strong>Rp <?= number_format($total) ?></strong>.</p>
-            <div class="mb-3 d-flex flex-column justify-content-center align-items-center">
-              <img src="uploads/qris_placeholder.png" alt="QRIS QR Code" class="img-fluid border p-2 bg-white rounded" style="max-width: 220px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-              <a href="uploads/qris_placeholder.png" class="text-center mt-2" download style="font-weight: 600; color: #333;">Download QRIS</a>
-            </div>
-            <div class="form-group text-start">
-              <label for="bukti_transfer" class="form-label" style="font-weight: 600; color: #333;">Unggah Bukti Transfer <span class="text-danger">*</span></label>
-              <input type="file" class="form-control" id="bukti_transfer" name="bukti_transfer" accept="image/*" required style="border: 2px dashed #f4a178; padding: 10px;">
-              <small class="text-muted">Hanya berkas gambar (JPG, JPEG, PNG) yang diperbolehkan.</small>
-            </div>
-          </div>
-        <?php endif; ?>
+
 
     </div>
 
@@ -171,7 +157,6 @@ $total = $subtotal + $deliveryFee;
             $pmode = $_POST['payment_mode'] ?? '';
             if ($pmode === 'Takeaway') echo 'Ambil di tempat';
             elseif ($pmode === 'Cash') echo 'Tunai (Cash)';
-            elseif ($pmode === 'Card') echo 'Transfer (QRIS)';
             elseif ($pmode === 'Midtrans') echo 'Pembayaran Online (Midtrans)';
             else echo htmlspecialchars($pmode);
           ?></div>
@@ -190,12 +175,7 @@ $total = $subtotal + $deliveryFee;
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $payment_mode = $_POST['payment_mode'] ?? '';
 
-        if ($payment_mode == 'Card') {
-          echo '<button type="submit" class="Button">
-            Bayar
-           <svg viewBox="0 0 576 512" class="svgIcon"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
-           </button>';
-        } elseif ($payment_mode == 'Midtrans') {
+        if ($payment_mode == 'Midtrans') {
           echo '<button type="submit" class="order-btn" style="background-color: #007bff; border-color: #007bff;">Bayar Sekarang</button>';
         } else {
           echo '<button type="submit" class="order-btn ">Buat Pesanan</button>';
@@ -237,35 +217,7 @@ include_once ('includes/footer.html');
         });
       }
 
-      // QRIS file upload and submit button activation logic
-      const fileInput = document.getElementById('bukti_transfer');
-      const submitBtn = document.querySelector('.Button');
-      
-      if (fileInput && submitBtn) {
-        function disableButton() {
-          submitBtn.disabled = true;
-          submitBtn.style.opacity = '0.5';
-          submitBtn.style.cursor = 'not-allowed';
-          submitBtn.style.pointerEvents = 'none';
-        }
-        
-        function enableButton() {
-          submitBtn.disabled = false;
-          submitBtn.style.opacity = '1';
-          submitBtn.style.cursor = 'pointer';
-          submitBtn.style.pointerEvents = 'auto';
-        }
-        
-        disableButton();
-        
-        fileInput.addEventListener('change', function() {
-          if (fileInput.files && fileInput.files.length > 0) {
-            enableButton();
-          } else {
-            disableButton();
-          }
-        });
-      }
+
     });
   </script>
 </body>

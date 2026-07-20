@@ -234,7 +234,7 @@
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
       padding: 15px 0px;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255);
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
       border-bottom: 3px solid #eab308;

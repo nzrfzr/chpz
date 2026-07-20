@@ -133,10 +133,6 @@ if ($shippingQuery && $row = $shippingQuery->fetch_assoc()) {
           <label for="Cash">Tunai (Cash)</label>
         </div>
         <div>
-          <input type="radio" id="card" name="payment_mode" value="Card">
-          <label for="Card">Transfer (QRIS)</label>
-        </div>
-        <div>
           <input type="radio" id="midtrans" name="payment_mode" value="Midtrans">
           <label for="midtrans">Pembayaran Online (Midtrans)</label>
         </div>

@@ -20,41 +20,7 @@ $total = $_POST['total'] ?? 0;
 $subtotal = $_POST['subtotal'] ?? 0;
 $selectedItems = json_decode($_POST['selected_items'], true) ?? [];
 
-// Handle payment proof upload for Transfer (QRIS) / Card
-$uploadedImage = null;
-if ($paymentMode === 'Card') {
-    if (isset($_FILES['bukti_transfer']) && $_FILES['bukti_transfer']['error'] === UPLOAD_ERR_OK) {
-        $fileTmpPath = $_FILES['bukti_transfer']['tmp_name'];
-        $fileName = $_FILES['bukti_transfer']['name'];
-        $fileSize = $_FILES['bukti_transfer']['size'];
-        $fileType = $_FILES['bukti_transfer']['type'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
 
-        $allowedExtensions = array('jpg', 'jpeg', 'png');
-        if (in_array($fileExtension, $allowedExtensions)) {
-            $uploadFileDir = './uploads/bukti_transfer/';
-            if (!is_dir($uploadFileDir)) {
-                mkdir($uploadFileDir, 0755, true);
-            }
-            $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-            $dest_path = $uploadFileDir . $newFileName;
-
-            if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                $uploadedImage = $newFileName;
-            } else {
-                echo 'Gagal memindahkan file bukti transfer.';
-                exit;
-            }
-        } else {
-            echo 'Format file bukti transfer tidak valid. Hanya diperbolehkan JPG, JPEG, PNG.';
-            exit;
-        }
-    } else {
-        echo 'Bukti transfer wajib diunggah untuk metode pembayaran Transfer (QRIS).';
-        exit;
-    }
-}
 
 // Begin transaction
 $conn->begin_transaction();
@@ -69,16 +35,7 @@ try {
     $stmt->execute();
     $orderId = $stmt->insert_id;
 
-    // Insert to bukti_pembayaran if payment is QRIS
-    if ($paymentMode === 'Card' && $uploadedImage !== null) {
-        $proofStmt = $conn->prepare('INSERT INTO bukti_pembayaran (order_id, email, image) VALUES (?, ?, ?)');
-        if ($proofStmt === false) {
-            throw new Exception('Failed to prepare payment proof statement: ' . $conn->error);
-        }
-        $proofStmt->bind_param('iss', $orderId, $email, $uploadedImage);
-        $proofStmt->execute();
-        $proofStmt->close();
-    }
+
 
     // Prepare statement for inserting order items
     $stmt = $conn->prepare('INSERT INTO order_items (order_id, itemName, quantity, price, total_price, image) VALUES (?, ?, ?, ?, ?, ?)');

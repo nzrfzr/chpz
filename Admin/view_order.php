@@ -24,17 +24,7 @@ if ($orderId) {
   $itemsResult = $stmt->get_result();
   $stmt->close();
 
-  // Fetch payment proof if payment is QRIS (Card)
-  $proofImage = null;
-  $proofQuery = "SELECT image FROM bukti_pembayaran WHERE order_id = ?";
-  $proofStmt = $conn->prepare($proofQuery);
-  $proofStmt->bind_param('i', $orderId);
-  $proofStmt->execute();
-  $proofResult = $proofStmt->get_result();
-  if ($proofRow = $proofResult->fetch_assoc()) {
-      $proofImage = $proofRow['image'];
-  }
-  $proofStmt->close();
+
 } else {
   echo "Invalid order ID.";
   exit();
@@ -91,7 +81,6 @@ include 'includes/sidebar.php';
       <li><a href="index.php"><i class="fas fa-chart-line"></i> Ringkasan</a></li>
       <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
       <li><a href="admin_orders.php" class="active"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
-      <li><a href="payment_proofs.php"><i class="fas fa-receipt"></i> Bukti Transfer</a></li>
       <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
       <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
       <li><a href="settings.php"><i class="fas fa-cog"></i> Pengaturan Midtrans</a></li>
@@ -162,9 +151,7 @@ include 'includes/sidebar.php';
           <div class="summary-details">
             <p><strong>Metode Pembayaran:</strong></p>
             <p><?php 
-              if ($order['pmode'] === 'Card') {
-                  echo 'Transfer (QRIS)';
-              } elseif ($order['pmode'] === 'Takeaway') {
+              if ($order['pmode'] === 'Takeaway') {
                   echo 'Ambil di tempat';
               } elseif ($order['pmode'] === 'Cash') {
                   echo 'Tunai (Cash)';
@@ -175,16 +162,7 @@ include 'includes/sidebar.php';
               }
             ?></p>
           </div>
-          <?php if ($proofImage !== null): ?>
-          <div class="summary-details mt-2">
-            <p><strong>Bukti Transfer:</strong></p>
-            <p>
-              <a href="../uploads/bukti_transfer/<?php echo htmlspecialchars($proofImage); ?>" target="_blank">
-                <img src="../uploads/bukti_transfer/<?php echo htmlspecialchars($proofImage); ?>" alt="Bukti Transfer" style="max-width: 150px; border: 1px solid #ffc9b3; border-radius: 4px; padding: 2px;">
-              </a>
-            </p>
-          </div>
-          <?php endif; ?>
+
           <div class="summary-details">
             <p style="width: 60%;"><strong>Status Pembayaran:</strong></p>
             <select class="form-select" id="paymentStatus" name="payment_status">
