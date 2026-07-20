@@ -267,7 +267,7 @@ $userinfo = get_UserInfo($useremail);
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
       padding: 15px 0px;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255);
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
       border-bottom: 3px solid #eab308;
@@ -385,6 +385,9 @@ $userinfo = get_UserInfo($useremail);
               </li>
               <li class="nav-item">
                 <a class="nav-link mx-lg-2 <?php echo $current_page == 'index.php#About-Us' ? 'active' : ''; ?>" href="index.php#About-Us">Tentang Kami</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-lg-2 <?php echo $current_page == 'reservations.php' ? 'active' : ''; ?>" href="reservations.php">Reservasi</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link mx-lg-2 <?php echo $current_page == '#review' ? 'active' : ''; ?>" href="#review">Ulasan</a>

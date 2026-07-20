@@ -294,7 +294,7 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-              Flavour Fiesta
+              Cheapiza
             </h5>
             <button type="button" class="btn-close btn-close-red" aria-label="Close" id="closeOffcanvas"></button>
           </div>
@@ -310,6 +310,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link mx-lg-2 <?php echo $current_page == 'index.php#About-Us' ? 'active' : ''; ?>" href="index.php#About-Us">Tentang Kami</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-lg-2 <?php echo $current_page == 'reservations.php' ? 'active' : ''; ?>" href="reservations.php">Reservasi</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link mx-lg-2 <?php echo $current_page == '#review' ? 'active' : ''; ?>" href="#review">Ulasan</a>
