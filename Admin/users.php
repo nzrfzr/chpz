@@ -66,7 +66,7 @@ include 'includes/sidebar.php';
       <li><a href="reviews.php"><i class="fas fa-star" style="margin-right: 10px;"></i> Ulasan</a></li>
       <li><a href="staffs.php" ><i class="fas fa-users" style="margin-right: 10px;"></i> Staf</a></li>
       <li><a href="profile.php"><i class="fas fa-user" style="margin-right: 10px;"></i> Pengaturan Profil</a></li>
-      <li><a href="settings.php"><i class="fas fa-cog" style="margin-right: 10px;"></i> Pengaturan Midtrans</a></li>
+      <li><a href="settings.php"><i class="fas fa-cog" style="margin-right: 10px;"></i> Pengaturan Toko</a></li>
       <li style="margin-right: 10px;"><a href="logout.php"><i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Keluar</a></li>
     </ul>
   </div>

@@ -52,7 +52,7 @@ include 'includes/sidebar.php';
             <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
             <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
             <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
-            <li><a href="settings.php"><i class="fas fa-cog" style="margin-right: 10px;"></i> Pengaturan Midtrans</a></li>
+            <li><a href="settings.php"><i class="fas fa-cog" style="margin-right: 10px;"></i> Pengaturan Toko</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
         </ul>
     </div>
