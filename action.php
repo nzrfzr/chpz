@@ -7,13 +7,13 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 
     // Add products into the cart table
-    if (isset($_POST['pid']) && isset($_POST['pname']) && isset($_POST['pprice'])) {
+    if (isset($_POST['pid']) && isset($_POST['pname']) && isset($_POST['pprice']) && (!isset($_POST['action']) || $_POST['action'] !== 'order_now')) {
         $pid = $_POST['pid'];
         $pname = $_POST['pname'];
         $pprice = $_POST['pprice'];
         $pimage = $_POST['pimage'];
         $pcode = $_POST['pcode'];
-        $pqty = 1;
+        $pqty = isset($_POST['pqty']) ? intval($_POST['pqty']) : 1;
 
         $total_price = $pprice * $pqty;
 
@@ -55,10 +55,43 @@ if (isset($_SESSION['email'])) {
         echo $quantity;
     }
 
-    
+    // Order Now handler
+    if (isset($_POST['action']) && $_POST['action'] == 'order_now') {
+        header('Content-Type: application/json');
+        $pid = $_POST['pid'];
+        $pname = $_POST['pname'];
+        $pprice = $_POST['pprice'];
+        $pimage = $_POST['pimage'] ?? '';
+        $pcode = $_POST['pcode'] ?? '';
+        $pqty = isset($_POST['pqty']) ? intval($_POST['pqty']) : 1;
+        $total_price = $pprice * $pqty;
 
+        $stmt = $conn->prepare('SELECT id, quantity FROM cart WHERE itemName=? AND email=?');
+        $stmt->bind_param('ss', $pname, $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $row = $res->fetch_assoc();
+        $stmt->close();
 
+        $cart_id = 0;
+        if ($row) {
+            $new_qty = $pqty; 
+            $new_total = $pprice * $new_qty;
+            $cart_id = $row['id'];
+            $upd = $conn->prepare('UPDATE cart SET quantity=?, total_price=? WHERE id=?');
+            $upd->bind_param('idi', $new_qty, $new_total, $cart_id);
+            $upd->execute();
+            $upd->close();
+        } else {
+            $ins = $conn->prepare('INSERT INTO cart (itemName, price, image, quantity, total_price, catName, email) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $ins->bind_param('sdsisss', $pname, $pprice, $pimage, $pqty, $total_price, $pcode, $email);
+            $ins->execute();
+            $cart_id = $ins->insert_id;
+            $ins->close();
+        }
+        echo json_encode(['success' => true, 'cart_id' => $cart_id, 'quantity' => $pqty]);
+        exit;
+    }
     
-   
 } 
 ?>

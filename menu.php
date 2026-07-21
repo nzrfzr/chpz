@@ -78,7 +78,7 @@ while ($row = $categoryResult->fetch_assoc()) {
                         <div class="col-md-6 col-lg-3 col-sm-12 menu-item col-xs-12">
                             <div class="card mt-4">
                                 <img src="uploads/<?= $row['image'] ?>" alt="image" class="card-img-top" height="250">
-                                <div class="card-body">
+                                <div class="card-body" style="height: auto; min-height: 320px; padding-bottom: 100px;">
                                     <h4 class="card-title text-center mt-3"><?= $row['itemName'] ?></h4>
                                     <p class="card-title text-center description ps-3 pe-3 pt-2 pb-3" style="font-weight: 500; font-size: 15px;"><?= $row['description'] ?></p>
                                     <?php if ($row['status'] == 'Unavailable') : ?>
@@ -91,13 +91,21 @@ while ($row = $categoryResult->fetch_assoc()) {
                                             <input type="hidden" class="pprice" value="<?= $row['price'] ?>">
                                             <input type="hidden" class="pimage" value="<?= $row['image'] ?>">
                                             <input type="hidden" class="pcode" value="<?= $row['catName'] ?>">
-                                            <div class="button-container mt-2">
-                                                <div>
-                                                    <p class="card-text text-center ">Rp&nbsp;<?= number_format($row['price']) ?>/-</p>
+                                            <div class="button-container mt-2 d-flex flex-column" style="gap: 10px;">
+                                                <div class="w-100 d-flex justify-content-between align-items-center">
+                                                    <p class="card-text text-center m-0" style="font-weight: 700; color: #dc2626; font-size: 16px;">Rp&nbsp;<?= number_format($row['price']) ?>/-</p>
+                                                    <div class="d-flex align-items-center">
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary minus-qty" style="padding: 0 8px;">-</button>
+                                                        <input type="text" class="form-control text-center mx-1 itemQty" value="1" style="width: 40px; height: 30px; padding: 0;" readonly>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary plus-qty" style="padding: 0 8px;">+</button>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <button class="addItemBtn <?= $buttonClass ?>" type="button">
+                                                <div class="w-100 d-flex justify-content-between">
+                                                    <button class="addItemBtn <?= $buttonClass ?>" type="button" style="flex: 1; margin-right: 5px; padding: 5px 10px;" title="Tambah ke Keranjang">
                                                         <i class="fas fa-cart-plus"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary orderNowBtn <?= $buttonClass ?>" type="button" style="flex: 2; font-size: 14px; font-weight: 600; background-color: #fb4a36; border-color: #fb4a36; padding: 5px 10px;">
+                                                        Pesan Sekarang
                                                     </button>
                                                 </div>
                                             </div>
@@ -165,7 +173,7 @@ while ($row = $categoryResult->fetch_assoc()) {
                 var pprice = $form.find(".pprice").val();
                 var pimage = $form.find(".pimage").val();
                 var pcode = $form.find(".pcode").val();
-                var pqty = 1; // Default quantity
+                var pqty = $form.find(".itemQty").val() || 1; 
 
                 $.ajax({
                     url: 'action.php',
@@ -183,6 +191,74 @@ while ($row = $categoryResult->fetch_assoc()) {
                         $("#message").html(response);
                         window.scrollTo(0, 0);
                         load_cart_item_number();
+                    }
+                });
+            });
+
+            // Quantity buttons
+            $(".plus-qty").click(function() {
+                var input = $(this).siblings(".itemQty");
+                input.val(parseInt(input.val()) + 1);
+            });
+            
+            $(".minus-qty").click(function() {
+                var input = $(this).siblings(".itemQty");
+                var val = parseInt(input.val());
+                if (val > 1) {
+                    input.val(val - 1);
+                }
+            });
+
+            $(".orderNowBtn").click(function(e) {
+                e.preventDefault();
+
+                if (!userIsLoggedIn()) {
+                    showToast();
+                    return;
+                }
+
+                if ($(this).hasClass('disabled-button')) {
+                    return;
+                }
+
+                var email = getUserEmail();
+                var $form = $(this).closest(".form-submit");
+                var pid = $form.find(".pid").val();
+                var pname = $form.find(".pname").val();
+                var pprice = $form.find(".pprice").val();
+                var pimage = $form.find(".pimage").val();
+                var pcode = $form.find(".pcode").val();
+                var pqty = $form.find(".itemQty").val() || 1;
+
+                $.ajax({
+                    url: 'action.php',
+                    method: 'post',
+                    data: {
+                        action: 'order_now',
+                        pid: pid,
+                        pname: pname,
+                        pprice: pprice,
+                        pqty: pqty,
+                        pimage: pimage,
+                        pcode: pcode,
+                        email: email
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            var selectedItems = [{
+                                id: response.cart_id,
+                                quantity: response.quantity
+                            }];
+                            
+                            var form = $('<form action="order_review.php" method="POST"></form>');
+                            form.append('<input type="hidden" name="selected_items" value=\'' + JSON.stringify(selectedItems) + '\'>');
+                            form.append('<input type="hidden" name="payment_mode" value="Takeaway">');
+                            $('body').append(form);
+                            form.submit();
+                        } else {
+                            showToast();
+                        }
                     }
                 });
             });
