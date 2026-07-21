@@ -91,20 +91,20 @@ while ($row = $categoryResult->fetch_assoc()) {
                                             <input type="hidden" class="pprice" value="<?= $row['price'] ?>">
                                             <input type="hidden" class="pimage" value="<?= $row['image'] ?>">
                                             <input type="hidden" class="pcode" value="<?= $row['catName'] ?>">
-                                            <div class="button-container mt-2 d-flex flex-column" style="gap: 10px;">
+                                            <div class="button-container mt-2 d-flex flex-column" style="gap: 12px; padding: 12px;">
                                                 <div class="w-100 d-flex justify-content-between align-items-center">
-                                                    <p class="card-text text-center m-0" style="font-weight: 700; color: #dc2626; font-size: 16px;">Rp&nbsp;<?= number_format($row['price']) ?>/-</p>
-                                                    <div class="d-flex align-items-center">
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary minus-qty" style="padding: 0 8px;">-</button>
-                                                        <input type="text" class="form-control text-center mx-1 itemQty" value="1" style="width: 40px; height: 30px; padding: 0;" readonly>
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary plus-qty" style="padding: 0 8px;">+</button>
+                                                    <p class="card-text text-center m-0" style="font-weight: 700; color: #dc2626; font-size: 18px;">Rp&nbsp;<?= number_format($row['price']) ?>/-</p>
+                                                    <div class="qty-selector d-flex align-items-center" style="border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; height: 36px; width: 100px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+                                                        <button type="button" class="btn minus-qty" style="flex: 1; border: none; background: transparent; padding: 0; font-weight: bold; color: #475569; height: 100%; box-shadow: none;">-</button>
+                                                        <input type="text" class="form-control text-center itemQty" value="1" readonly style="flex: 1.2; border: none; background: transparent; padding: 0; font-weight: 600; color: #1e293b; height: 100%; box-shadow: none; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-radius: 0;">
+                                                        <button type="button" class="btn plus-qty" style="flex: 1; border: none; background: transparent; padding: 0; font-weight: bold; color: #475569; height: 100%; box-shadow: none;">+</button>
                                                     </div>
                                                 </div>
-                                                <div class="w-100 d-flex justify-content-between">
-                                                    <button class="addItemBtn <?= $buttonClass ?>" type="button" style="flex: 1; margin-right: 5px; padding: 5px 10px;" title="Tambah ke Keranjang">
-                                                        <i class="fas fa-cart-plus"></i>
+                                                <div class="w-100 d-flex justify-content-between" style="gap: 10px;">
+                                                    <button class="addItemBtn <?= $buttonClass ?>" type="button" style="flex: 0 0 50px; height: 42px; display: flex; justify-content: center; align-items: center; border-radius: 8px; padding: 0; margin: 0; background-color: #dc2626; border: none; color: white;" title="Tambah ke Keranjang">
+                                                        <i class="fas fa-cart-plus" style="font-size: 18px;"></i>
                                                     </button>
-                                                    <button class="btn btn-primary orderNowBtn <?= $buttonClass ?>" type="button" style="flex: 2; font-size: 14px; font-weight: 600; background-color: #fb4a36; border-color: #fb4a36; padding: 5px 10px;">
+                                                    <button class="orderNowBtn <?= $buttonClass ?>" type="button" style="flex: 1; height: 42px; font-size: 15px; font-weight: 600; background-color: #dc2626; color: white; border: none; border-radius: 8px; display: flex; justify-content: center; align-items: center; padding: 0; transition: opacity 0.2s ease;">
                                                         Pesan Sekarang
                                                     </button>
                                                 </div>
@@ -122,8 +122,44 @@ while ($row = $categoryResult->fetch_assoc()) {
     <!-- Toast Notification Container -->
     <div id="toast" class="toast">
         <button class="toast-btn toast-close">&times;</button>
-        <span class="pt-3"><strong>Anda harus masuk terlebih dahulu untuk menambah item ke keranjang.</strong></span><br>
+        <span class="pt-3"><strong>Anda harus masuk terlebih dahulu.</strong></span><br>
         <button class="toast-btn toast-ok">Oke</button>
+    </div>
+
+    <!-- Payment Method Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 12px; border: none; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+          <div class="modal-header" style="background-color: #fefce8; border-bottom: 1px solid rgba(234, 179, 8, 0.2);">
+            <h5 class="modal-title" id="paymentModalLabel" style="font-weight: 700; color: #dc2626;">Pilih Metode Pembayaran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" style="color: #64748b;">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="padding: 24px;">
+            <p class="text-muted mb-4" style="font-size: 15px;">Silakan pilih metode pembayaran untuk pesanan Anda:</p>
+            
+            <div class="payment-options">
+                <div class="custom-control custom-radio mb-3 p-3" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
+                    <input type="radio" id="payTakeaway" name="modal_payment_mode" class="custom-control-input" value="Takeaway" checked>
+                    <label class="custom-control-label w-100" for="payTakeaway" style="font-weight: 600; color: #1e293b; cursor: pointer;">Ambil di tempat</label>
+                </div>
+                <div class="custom-control custom-radio mb-3 p-3" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
+                    <input type="radio" id="payCash" name="modal_payment_mode" class="custom-control-input" value="Cash">
+                    <label class="custom-control-label w-100" for="payCash" style="font-weight: 600; color: #1e293b; cursor: pointer;">Tunai (Cash)</label>
+                </div>
+                <div class="custom-control custom-radio p-3" style="border: 1px solid #e2e8f0; border-radius: 8px; background-color: #f8fafc;">
+                    <input type="radio" id="payMidtrans" name="modal_payment_mode" class="custom-control-input" value="Midtrans">
+                    <label class="custom-control-label w-100" for="payMidtrans" style="font-weight: 600; color: #1e293b; cursor: pointer;">Pembayaran Online (Midtrans)</label>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="border-top: none; padding: 20px 24px; background-color: #f8fafc;">
+            <button type="button" class="btn btn-light" data-dismiss="modal" style="border-radius: 8px; font-weight: 600; color: #64748b; border: 1px solid #cbd5e1;">Batal</button>
+            <button type="button" class="btn btn-primary" id="confirmOrderBtn" style="border-radius: 8px; font-weight: 600; background-color: #fb4a36; border-color: #fb4a36; padding: 8px 24px;">Lanjutkan</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!--Footer-->
     <?php
@@ -198,16 +234,19 @@ while ($row = $categoryResult->fetch_assoc()) {
             // Quantity buttons
             $(".plus-qty").click(function() {
                 var input = $(this).siblings(".itemQty");
-                input.val(parseInt(input.val()) + 1);
+                var currentVal = parseInt(input.val()) || 1;
+                input.val(currentVal + 1);
             });
             
             $(".minus-qty").click(function() {
                 var input = $(this).siblings(".itemQty");
-                var val = parseInt(input.val());
+                var val = parseInt(input.val()) || 1;
                 if (val > 1) {
                     input.val(val - 1);
                 }
             });
+
+            var currentOrderData = null;
 
             $(".orderNowBtn").click(function(e) {
                 e.preventDefault();
@@ -223,29 +262,39 @@ while ($row = $categoryResult->fetch_assoc()) {
 
                 var email = getUserEmail();
                 var $form = $(this).closest(".form-submit");
-                var pid = $form.find(".pid").val();
-                var pname = $form.find(".pname").val();
-                var pprice = $form.find(".pprice").val();
-                var pimage = $form.find(".pimage").val();
-                var pcode = $form.find(".pcode").val();
-                var pqty = $form.find(".itemQty").val() || 1;
+                
+                currentOrderData = {
+                    action: 'order_now',
+                    pid: $form.find(".pid").val(),
+                    pname: $form.find(".pname").val(),
+                    pprice: $form.find(".pprice").val(),
+                    pimage: $form.find(".pimage").val(),
+                    pcode: $form.find(".pcode").val(),
+                    pqty: $form.find(".itemQty").val() || 1,
+                    email: email
+                };
+
+                $('#paymentModal').modal('show');
+            });
+
+            $("#confirmOrderBtn").click(function() {
+                if (!currentOrderData) return;
+                
+                var paymentMode = $("input[name='modal_payment_mode']:checked").val();
+                
+                var $btn = $(this);
+                $btn.prop('disabled', true).text('Memproses...');
 
                 $.ajax({
                     url: 'action.php',
                     method: 'post',
-                    data: {
-                        action: 'order_now',
-                        pid: pid,
-                        pname: pname,
-                        pprice: pprice,
-                        pqty: pqty,
-                        pimage: pimage,
-                        pcode: pcode,
-                        email: email
-                    },
+                    data: currentOrderData,
                     dataType: 'json',
                     success: function(response) {
+                        $btn.prop('disabled', false).text('Lanjutkan');
                         if (response.success) {
+                            $('#paymentModal').modal('hide');
+                            
                             var selectedItems = [{
                                 id: response.cart_id,
                                 quantity: response.quantity
@@ -253,12 +302,16 @@ while ($row = $categoryResult->fetch_assoc()) {
                             
                             var form = $('<form action="order_review.php" method="POST"></form>');
                             form.append('<input type="hidden" name="selected_items" value=\'' + JSON.stringify(selectedItems) + '\'>');
-                            form.append('<input type="hidden" name="payment_mode" value="Takeaway">');
+                            form.append('<input type="hidden" name="payment_mode" value="' + paymentMode + '">');
                             $('body').append(form);
                             form.submit();
                         } else {
                             showToast();
                         }
+                    },
+                    error: function() {
+                        $btn.prop('disabled', false).text('Lanjutkan');
+                        alert("Terjadi kesalahan. Silakan coba lagi.");
                     }
                 });
             });
