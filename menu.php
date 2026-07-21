@@ -29,14 +29,14 @@ while ($row = $categoryResult->fetch_assoc()) {
     <title>Menu</title>
     <style>
         .disabled-button {
-            background-color: gray;
-            color: white;
+            background-color: #94a3b8 !important;
+            color: #cbd5e1 !important;
             cursor: not-allowed;
             pointer-events: none;
         }
 
         .disabled-button i {
-            color: white;
+            color: #cbd5e1 !important;
         }
 
         section:nth-child(odd) {
@@ -45,6 +45,13 @@ while ($row = $categoryResult->fetch_assoc()) {
 
         section:nth-child(even) {
             background-color: #ffffff;
+        }
+
+        /* Fix: Make Bootstrap close button inside modal work */
+        #paymentModal button.close {
+            position: static !important;
+            pointer-events: auto !important;
+            z-index: 10;
         }
     </style>
 </head>
@@ -325,6 +332,17 @@ while ($row = $categoryResult->fetch_assoc()) {
                         alert("Terjadi kesalahan. Silakan coba lagi.");
                     }
                 });
+            });
+
+            // Explicit fallback: close modal on Batal and X buttons
+            $(document).on('click', '#paymentModal [data-dismiss="modal"]', function(e) {
+                e.stopPropagation();
+                $('#paymentModal').modal('hide');
+            });
+
+            // Reset currentOrderData when modal is fully closed
+            $('#paymentModal').on('hidden.bs.modal', function() {
+                currentOrderData = null;
             });
 
             // Close button functionality
