@@ -80,49 +80,218 @@ section {
 }
 
 .card {
-  border: 1px solid rgba(220, 38, 38, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  background-color: #ffffff;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(220, 38, 38, 0.1);
-  border-color: #eab308;
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.12);
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+.card-img-top {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.03);
 }
 
 .card-body {
   position: relative;
-  height: 300px;
-  padding-bottom: 20px;
-  border-top: rgba(220, 38, 38, 0.1) 1px solid;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: #ffffff;
+  border-top: 1px solid #f1f5f9;
 }
 
 .card-status {
   color: #dc2626;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 600;
 }
 
+/* Yellow Action Box Container */
 .button-container {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
   background-color: #fefce8;
-  border: 1px solid rgba(234, 179, 8, 0.2);
-  padding: 12px 10px;
-  border-radius: 8px;
-  gap: 10px;
-  bottom: 25px;
-  transform: translateX(-50%);
-  width: 90%;
-  left: 50%;
+  border: 1.5px solid rgba(234, 179, 8, 0.3);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 10px rgba(234, 179, 8, 0.08);
+  transition: all 0.2s ease;
+  position: static;
+  transform: none;
+  width: 100%;
+}
+
+.button-container:hover {
+  border-color: #fde047;
+  box-shadow: 0 4px 14px rgba(234, 179, 8, 0.15);
+}
+
+/* Price styling */
+.card-price {
+  font-weight: 800;
+  color: #dc2626;
+  font-size: 1.15rem;
+  letter-spacing: -0.3px;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Quantity selector component */
+.form-submit .qty-selector {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  height: 36px !important;
+  width: 100px !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+  background: #ffffff !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.form-submit .qty-selector:focus-within,
+.form-submit .qty-selector:hover {
+  border-color: #94a3b8 !important;
+}
+
+.form-submit .qty-selector .btn {
+  flex: 1 1 0% !important;
+  width: auto !important;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #475569 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+}
+
+.form-submit .qty-selector .btn:hover {
+  background-color: #f1f5f9 !important;
+  color: #dc2626 !important;
+}
+
+.form-submit .qty-selector .btn:active {
+  background-color: #e2e8f0 !important;
+}
+
+.form-submit .qty-selector input.itemQty {
+  flex: 1.2 1 0% !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-left: 1px solid #e2e8f0 !important;
+  border-right: 1px solid #e2e8f0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  color: #0f172a !important;
+  text-align: center !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Buttons in Action Box */
+.form-submit .addItemBtn {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 10px !important;
+  background-color: #dc2626 !important;
+  border: none !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2) !important;
+}
+
+.form-submit .addItemBtn i {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+}
+
+.form-submit .addItemBtn:hover {
+  background-color: #b91c1c !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.35) !important;
+}
+
+.form-submit .addItemBtn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2) !important;
+}
+
+.form-submit .orderNowBtn {
+  flex: 1 1 auto !important;
+  height: 44px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  background-color: #dc2626 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2) !important;
+  white-space: nowrap !important;
+}
+
+.form-submit .orderNowBtn:hover {
+  background-color: #b91c1c !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.35) !important;
+  color: #ffffff !important;
+}
+
+.form-submit .orderNowBtn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.2) !important;
 }
 
 section h1 {

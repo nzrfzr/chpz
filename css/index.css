@@ -653,7 +653,7 @@ footer {
   font-size: 2rem;
 }
 
-form label {
+.reservation-section form label {
   display: block;
   margin-bottom: 8px;
   text-align: left;
@@ -662,7 +662,7 @@ form label {
   color: #475569;
 }
 
-form input {
+.reservation-section form input {
   width: 100%;
   padding: 12px;
   border: 1px solid #cbd5e1;
@@ -672,13 +672,13 @@ form input {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-form input:focus {
+.reservation-section form input:focus {
   outline: none;
   border-color: #dc2626;
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
 }
 
-form button {
+.reservation-section form button {
   width: 100%;
   padding: 14px;
   background-color: #dc2626;
@@ -693,7 +693,7 @@ form button {
   box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
 }
 
-form button:hover {
+.reservation-section form button:hover {
   background-color: #eab308;
   box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
 }
