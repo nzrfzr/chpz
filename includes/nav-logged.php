@@ -224,6 +224,10 @@ $userinfo = get_UserInfo($useremail);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
       overflow: hidden;
     }
+    
+    .dropdown-menu.show {
+      display: block !important;
+    }
 
     .dropdown-toggle {
       color: #1e293b;
@@ -255,9 +259,7 @@ $userinfo = get_UserInfo($useremail);
       border-bottom: 2px solid #dc2626;
     }
 
-    .nav-item.dropdown:hover .dropdown-menu {
-      display: block;
-    }
+    /* Hover effect removed to allow click to toggle */
 
     .logo:hover {
       color: #eab308 !important;
@@ -399,7 +401,7 @@ $userinfo = get_UserInfo($useremail);
           <span id="cart-item" class="badge badge-danger"></span></a>
         <!-- Profile Icon with Dropdown Menu -->
         <li class="nav-item dropdown ms-3" style="list-style: none; ">
-          <a href="#" class="dropdown-toggle" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class="dropdown-toggle" id="profileDropdown" aria-haspopup="true" aria-expanded="false">
             <img src="uploads/<?php echo htmlspecialchars($userinfo['profile_image']); ?>" alt="Profile Picture" class="nav-profile">
           </a>
           <ul class="dropdown-menu" aria-labelledby="profileDropdown" style="margin-left: -50px;">
@@ -440,6 +442,27 @@ $userinfo = get_UserInfo($useremail);
 
     toggleOffcanvasBtn.addEventListener("click", function() {
       offcanvasNavbar.show();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const profileDropdown = document.getElementById("profileDropdown");
+      if (profileDropdown) {
+        profileDropdown.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const menu = this.nextElementSibling || this.parentElement.querySelector(".dropdown-menu");
+          if (menu) {
+            menu.classList.toggle("show");
+          }
+        });
+        
+        document.addEventListener("click", function(e) {
+          const menu = document.querySelector(".dropdown-menu");
+          if (menu && !profileDropdown.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.remove("show");
+          }
+        });
+      }
     });
   </script>
   <script>

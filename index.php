@@ -192,7 +192,7 @@ $conn->close();
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title text-center">' . $item['itemName'] . '</h5>';
                 echo '<p class="card-text text-center">Rp ' . $item['price'] . '</p>';
-                echo '<a class="button-cart" onclick="addToCart()">Tambah ke Keranjang</a>';
+                echo '<a href="menu.php" class="button-cart">Lihat Menu</a>';
                 echo '</div>';
                 echo '</div>';
               }
