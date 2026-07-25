@@ -29,17 +29,8 @@ include 'includes/sidebar.php';
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
  
-  <link rel="stylesheet" href="css/admin_user.css">
   <link rel="stylesheet" href="css/sidebar.css">
- <style>
-  .sidebar ul li a i {
-  margin-right: 10px;
-}
-
-.sidebar ul li a.active {
-  font-weight: bold;
-}
- </style>
+  <link rel="stylesheet" href="css/admin_user.css">
 </head>
 
 <body>
@@ -381,7 +372,6 @@ include 'includes/sidebar.php';
       document.getElementById('editUserModal').classList.remove('open');
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
 </body>
 

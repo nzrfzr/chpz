@@ -33,14 +33,6 @@ include 'includes/sidebar.php';
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/admin_user.css">
   <style>
-    .sidebar ul li a i {
-      margin-right: 10px;
-    }
-
-    .sidebar ul li a.active {
-      font-weight: bold;
-    }
-
     #editUserModal .modal-container {
       height: 39rem;
     }
@@ -415,7 +407,6 @@ include 'includes/sidebar.php';
       document.getElementById('editUserModal').classList.remove('open');
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
 </body>
 
