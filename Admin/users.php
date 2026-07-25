@@ -17,12 +17,12 @@ include 'includes/sidebar.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin User Management</title>
+  <title>Manajemen Pengguna</title>
   <!-- Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +58,7 @@ include 'includes/sidebar.php';
     <!-- Navigation Items -->
     <ul>
       <li><a href="index.php"><i class="fas fa-chart-line" style="margin-right: 10px;"></i> Ringkasan</a></li>
-      <li><a href="admin_menu.php" ><i class="fas fa-utensils" style="margin-right: 10px;"></i> Menu Management</a></li>
+      <li><a href="admin_menu.php" ><i class="fas fa-utensils" style="margin-right: 10px;"></i> Manajemen Menu</a></li>
       <li><a href="admin_orders.php"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> Pesanan</a></li>
       
       <li><a href="reservations.php"><i class="fas fa-calendar-alt" style="margin-right: 10px;"></i> Reservasi</a></li>
@@ -75,15 +75,15 @@ include 'includes/sidebar.php';
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-users"></i>&nbsp;User List</h2>
+      <h2><i class="fas fa-users"></i>&nbsp;Daftar Pengguna</h2>
     </div>
 
 
 
     <div class="actions">
-      <button onclick="openaddUserModal()"><i class="fas fa-user-plus"></i> &nbsp; Add User</button>
+      <button onclick="openaddUserModal()"><i class="fas fa-user-plus"></i> &nbsp; Tambah Pengguna</button>
       <form method="POST" id="searchForm" class="search-bar">
-        <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
+        <input type="text" name="search" placeholder="Cari..." value="<?php echo htmlspecialchars($search); ?>">
       </form>
       
 
@@ -93,13 +93,13 @@ include 'includes/sidebar.php';
       <thead>
         <tr>
           <th>NO</th>
-          <th>Date Created</th>
+          <th>Tanggal Dibuat</th>
           <th>Email</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Contact</th>
-          <th>Password</th>
-          <th>Action</th>
+          <th>Nama Depan</th>
+          <th>Nama Belakang</th>
+          <th>Kontak</th>
+          <th>Kata Sandi</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -134,7 +134,7 @@ include 'includes/sidebar.php';
             $counter++;
           }
         } else {
-          echo "<tr><td colspan='8' style='text-align: center;'>No Users Found</td></tr>";
+          echo "<tr><td colspan='8' style='text-align: center;'>Pengguna Tidak Ditemukan</td></tr>";
         }
         $conn->close();
         ?>
@@ -149,7 +149,7 @@ include 'includes/sidebar.php';
     <div class="modal-container">
       <form id="addUserForm" method="POST" action="add_user.php">
         <div class="modal-header">
-          <h2>Add User</h2>
+          <h2>Tambah Pengguna</h2>
           <span class="close-icon" onclick="closeaddUserModal()">&times;</span>
         </div>
         <div class="modal-content">
@@ -162,21 +162,21 @@ include 'includes/sidebar.php';
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="firstName" id="firstName" class="input" required>
-            <label for="firstName" class="label">First Name</label>
+            <label for="firstName" class="label">Nama Depan</label>
           </div>
         </div>
 
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="lastName" id="lastName" class="input" required>
-            <label for="lastName" class="label">last Name</label>
+            <label for="lastName" class="label">Nama Belakang</label>
           </div>
         </div>
 
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="contact" id="contact" class="input" required>
-            <label for="contact" class="label">Contact</label>
+            <label for="contact" class="label">Kontak</label>
           </div>
         </div>
 
@@ -186,13 +186,13 @@ include 'includes/sidebar.php';
             <span class="toggle-password" onclick="togglePasswordVisibility()">
               <i class="fas fa-eye-slash" id="passwordIcon"></i>
             </span>
-            <label for="password" class="label">Password</label>
+            <label for="password" class="label">Kata Sandi</label>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="button" onclick="closeaddUserModal()">Cancel</button>
-          <button type="submit" class="button">Save</button>
+          <button type="button" class="button" onclick="closeaddUserModal()">Batal</button>
+          <button type="submit" class="button">Simpan</button>
         </div>
       </form>
     </div>
@@ -204,7 +204,7 @@ include 'includes/sidebar.php';
     <div class="modal-container">
       <form id="editUserForm" method="POST" action="edit_user.php">
         <div class="modal-header">
-          <h2>Edit User</h2>
+          <h2>Edit Pengguna</h2>
           <span class="close-icon" onclick="closeEditUserModal()">&times;</span>
         </div>
         <div class="modal-content">
@@ -214,27 +214,27 @@ include 'includes/sidebar.php';
           </div>
           <div class="input-group">
             <input type="text" name="firstName" id="editFirstName" class="input" required>
-            <label for="editFirstName" class="label">First Name</label>
+            <label for="editFirstName" class="label">Nama Depan</label>
           </div>
           <div class="input-group">
             <input type="text" name="lastName" id="editLastName" class="input" required>
-            <label for="editLastName" class="label">Last Name</label>
+            <label for="editLastName" class="label">Nama Belakang</label>
           </div>
           <div class="input-group">
             <input type="text" name="contact" id="editContact" class="input" required>
-            <label for="editContact" class="label">Contact</label>
+            <label for="editContact" class="label">Kontak</label>
           </div>
           <div class="input-group">
             <input type="password" name="password" id="editPassword" class="input" required>
             <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
               <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
             </span>
-            <label for="editPassword" class="label">Password</label>
+            <label for="editPassword" class="label">Kata Sandi</label>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="button" onclick="closeEditUserModal()">Cancel</button>
-          <button type="submit" class="button">Save</button>
+          <button type="button" class="button" onclick="closeEditUserModal()">Batal</button>
+          <button type="submit" class="button">Simpan</button>
         </div>
       </form>
     </div>
@@ -320,7 +320,7 @@ include 'includes/sidebar.php';
     });
 
     function deleteItem(email) {
-      if (confirm('Are you sure you want to delete this User?')) {
+      if (confirm('Apakah Anda yakin ingin menghapus Pengguna ini?')) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "delete_user.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

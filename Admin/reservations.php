@@ -61,12 +61,12 @@ include 'includes/sidebar.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservations</title>
+  <title>Reservasi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -134,7 +134,7 @@ include 'includes/sidebar.php';
             <i class="fas fa-calendar-day"></i>
           </div>
           <div class="stat-text">
-            <p>Today</p>
+            <p>Hari Ini</p>
             <p><?php echo $todaysReservations; ?></p>
           </div>
         </div>
@@ -143,7 +143,7 @@ include 'includes/sidebar.php';
             <i class="fas fa-calendar-alt"></i>
           </div>
           <div class="stat-text">
-            <p>Upcoming</p>
+            <p>Mendatang</p>
             <p><?php echo $upcomingReservations; ?></p>
           </div>
         </div>
@@ -152,16 +152,16 @@ include 'includes/sidebar.php';
             <i class="fas fa-calendar-times"></i>
           </div>
           <div class="stat-text">
-            <p>Cancelled</p>
+            <p>Dibatalkan</p>
             <p><?php echo $cancelledReservations; ?></p>
           </div>
         </div>
       </div>
       <div class="buttons-container">
-        <button onclick="openaddReservationModal()"><i class="fas fa-calendar-plus"></i> &nbsp; Add Reservation</button>
+        <button onclick="openaddReservationModal()"><i class="fas fa-calendar-plus"></i> &nbsp; Tambah Reservasi</button>
         <div class="actions">
           <select id="statusFilter" name="statusFilter" onchange="filterByStatus()">
-            <option value="">All</option>
+            <option value="">Semua Status</option>
             <option value="Pending">Pending</option>
             <option value="Approved">Approved</option>
             <option value="On Process">On Process</option>
@@ -169,22 +169,22 @@ include 'includes/sidebar.php';
             <option value="Cancelled">Cancelled</option>
           </select>
           <input type="date" id="dateFilter" name="dateFilter" value="<?php echo htmlspecialchars($dateFilter); ?>" onchange="filterByDate()">
-          <button type="button" onclick="clearFilter()">Clear</button>
+          <button type="button" onclick="clearFilter()">Bersihkan</button>
         </div>
       </div>
       <table id="userTable">
         <thead>
           <tr>
             <th>NO</th>
-            <th>Reserved At</th>
+            <th>Dibuat Pada</th>
             <th>Email</th>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>No Of Guests</th>
-            <th>Reserved Date</th>
-            <th>Reserved Time</th>
+            <th>Nama</th>
+            <th>Kontak</th>
+            <th>Jumlah Tamu</th>
+            <th>Tanggal Reservasi</th>
+            <th>Waktu Reservasi</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -217,7 +217,7 @@ include 'includes/sidebar.php';
     </tr>";
             }
           } else {
-            echo "<tr><td colspan='10' style='text-align: center;'>No Reservations Found</td></tr>";
+            echo "<tr><td colspan='10' style='text-align: center;'>Reservasi Tidak Ditemukan</td></tr>";
           }
           ?>
         </tbody>
@@ -232,7 +232,7 @@ include 'includes/sidebar.php';
       <div class="modal-container">
         <form id="addReservationForm" method="POST" action="add_reservation.php">
           <div class="modal-header">
-            <h2>Add Reservation</h2>
+            <h2>Tambah Reservasi</h2>
             <span class="close-icon" onclick="closeModal()">&times;</span>
           </div>
           <div class="modal-content">
@@ -245,41 +245,41 @@ include 'includes/sidebar.php';
           <div class="modal-content">
             <div class="input-group">
               <input type="text" name="name" id="name" class="input" required>
-              <label for="name" class="label">Name</label>
+              <label for="name" class="label">Nama</label>
             </div>
           </div>
 
           <div class="modal-content">
             <div class="input-group">
               <input type="text" name="contact" id="contact" class="input" required>
-              <label for="contact" class="label">Contact</label>
+              <label for="contact" class="label">Kontak</label>
             </div>
           </div>
 
           <div class="modal-content">
             <div class="input-group">
               <input type="number" name="noOfGuests" id="noOfGuests" class="input" required>
-              <label for="noOfGuests" class="label">No Of Guest</label>
+              <label for="noOfGuests" class="label">Jumlah Tamu</label>
             </div>
           </div>
 
           <div class="modal-content">
             <div class="input-group">
               <input type="date" name="reservedDate" id="reservedDate" class="input" required>
-              <label for="reservedDate" class="label">Reserved Date</label>
+              <label for="reservedDate" class="label">Tanggal Reservasi</label>
             </div>
           </div>
 
           <div class="modal-content">
             <div class="input-group">
               <input type="time" name="reservedTime" id="reservedTime" class="input" required>
-              <label for="reservedTime" class="label">Reserved Time</label>
+              <label for="reservedTime" class="label">Waktu Reservasi</label>
             </div>
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="button" onclick="closeaddReservationModal()">Cancel</button>
-            <button type="submit" class="button">Save</button>
+            <button type="button" class="button" onclick="closeaddReservationModal()">Batal</button>
+            <button type="submit" class="button">Simpan</button>
           </div>
         </form>
       </div>
@@ -291,7 +291,7 @@ include 'includes/sidebar.php';
   <div class="modal-container">
     <form id="editReservationForm" method="POST" action="edit_reservation.php">
       <div class="modal-header">
-        <h2>Edit Reservation</h2>
+        <h2>Edit Reservasi</h2>
         <span class="close-icon" onclick="closeEditReservationModal()">&times;</span>
       </div>
       <div class="modal-content">
@@ -303,36 +303,36 @@ include 'includes/sidebar.php';
       <div class="modal-content">
         <div class="input-group">
           <input type="text" name="name" id="editName" class="input" required>
-          <label for="editName" class="label">Name</label>
+          <label for="editName" class="label">Nama</label>
         </div>
       </div>
       <div class="modal-content">
         <div class="input-group">
           <input type="text" name="contact" id="editContact" class="input" required>
-          <label for="editContact" class="label">Contact</label>
+          <label for="editContact" class="label">Kontak</label>
         </div>
       </div>
       <div class="modal-content">
         <div class="input-group">
           <input type="number" name="noOfGuests" id="editNoOfGuests" class="input" required>
-          <label for="editNoOfGuests" class="label">No Of Guests</label>
+          <label for="editNoOfGuests" class="label">Jumlah Tamu</label>
         </div>
       </div>
       <div class="modal-content">
         <div class="input-group">
           <input type="date" name="reservedDate" id="editReservedDate" class="input" required>
-          <label for="editReservedDate" class="label">Reserved Date</label>
+          <label for="editReservedDate" class="label">Tanggal Reservasi</label>
         </div>
       </div>
       <div class="modal-content">
         <div class="input-group">
           <input type="time" name="reservedTime" id="editReservedTime" class="input" required>
-          <label for="editReservedTime" class="label">Reserved Time</label>
+          <label for="editReservedTime" class="label">Waktu Reservasi</label>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="button" onclick="closeEditReservationModal()">Cancel</button>
-        <button type="submit" class="button">Save</button>
+        <button type="button" class="button" onclick="closeEditReservationModal()">Batal</button>
+        <button type="submit" class="button">Simpan</button>
       </div>
     </form>
   </div>
@@ -376,7 +376,7 @@ include 'includes/sidebar.php';
 
       // Function to delete reservation
       function deleteItem(reservation_id) {
-        if (confirm('Are you sure you want to delete this reservation?')) {
+        if (confirm('Apakah Anda yakin ingin menghapus reservasi ini?')) {
           var xhr = new XMLHttpRequest();
           xhr.open("POST", "delete_reservation.php", true);
           xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

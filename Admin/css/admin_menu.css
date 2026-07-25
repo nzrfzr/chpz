@@ -391,3 +391,46 @@ button:hover {
 #delete-btn:hover {
   transform: scale(1.2);
 }
+
+.toggler svg {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  transition: all 0.2s ease;
+}
+
+.toggler-on {
+  left: 10px;
+  opacity: 0;
+}
+
+.toggler-off {
+  right: 10px;
+  opacity: 1;
+}
+
+.toggler .path {
+  fill: none;
+  stroke: #64748b;
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.toggler-on .path {
+  stroke: #10b981;
+}
+
+.toggler-off .path {
+  stroke: #ef4444;
+}
+
+.toggler input:checked + label .toggler-on {
+  opacity: 1;
+}
+
+.toggler input:checked + label .toggler-off {
+  opacity: 0;
+}

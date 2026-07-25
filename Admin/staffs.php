@@ -17,12 +17,12 @@ include 'includes/sidebar.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Staff Management</title>
+  <title>Manajemen Staf</title>
 
   <!--poppins-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,15 +85,15 @@ include 'includes/sidebar.php';
       <button id="toggleSidebar" class="toggle-button">
         <i class="fas fa-bars"></i>
       </button>
-      <h2><i class="fas fa-users"></i>&nbsp;Staff List</h2>
+      <h2><i class="fas fa-users"></i>&nbsp;Daftar Staf</h2>
     </div>
 
 
 
     <div class="actions">
-      <button onclick="openaddUserModal()"><i class="fas fa-user-plus"></i> &nbsp; Add Staff</button>
+      <button onclick="openaddUserModal()"><i class="fas fa-user-plus"></i> &nbsp; Tambah Staf</button>
       <form method="POST" id="searchForm" class="search-bar">
-        <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
+        <input type="text" name="search" placeholder="Cari..." value="<?php echo htmlspecialchars($search); ?>">
       </form>
 
 
@@ -103,13 +103,13 @@ include 'includes/sidebar.php';
       <thead>
         <tr>
           <th>ID</th>
-          <th>Date Created</th>
+          <th>Tanggal Dibuat</th>
           <th>Email</th>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Role</th>
-          <th>Password</th>
-          <th>Action</th>
+          <th>Nama</th>
+          <th>Kontak</th>
+          <th>Peran</th>
+          <th>Kata Sandi</th>
+          <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -143,7 +143,7 @@ include 'includes/sidebar.php';
                   </tr>";
           }
         } else {
-          echo "<tr><td colspan='8' style='text-align: center;'>No Users Found</td></tr>";
+          echo "<tr><td colspan='8' style='text-align: center;'>Staf Tidak Ditemukan</td></tr>";
         }
         $conn->close();
         ?>
@@ -158,7 +158,7 @@ include 'includes/sidebar.php';
     <div class="modal-container" style="height: 40rem;">
       <form id="addUserForm" method="POST" action="add_staffs.php">
         <div class="modal-header">
-          <h2>Add Staff</h2>
+          <h2>Tambah Staf</h2>
           <span class="close-icon" onclick="closeaddUserModal()">&times;</span>
         </div>
         <div class="modal-content">
@@ -171,33 +171,33 @@ include 'includes/sidebar.php';
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="firstName" id="firstName" class="input" required>
-            <label for="firstName" class="label">First Name</label>
+            <label for="firstName" class="label">Nama Depan</label>
           </div>
         </div>
 
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="lastName" id="lastName" class="input" required>
-            <label for="lastName" class="label">last Name</label>
+            <label for="lastName" class="label">Nama Belakang</label>
           </div>
         </div>
 
         <div class="modal-content">
           <div class="input-group">
             <input type="text" name="contact" id="contact" class="input" required>
-            <label for="contact" class="label">Contact</label>
+            <label for="contact" class="label">Kontak</label>
           </div>
         </div>
         <div class="modal-content">
           <div class="input-group">
             <select name="role" id="role" class="input" required>
-              <option value="">Role</option>
+              <option value="">Peran</option>
               <option value="admin">Admin</option>
               <option value="superadmin">Super Admin</option>
               <option value="delivery boy">Delivery Boy</option>
               <option value="waiter">Waiter</option>
             </select>
-            <label for="role" class="label">Role</label>
+            <label for="role" class="label">Peran</label>
           </div>
         </div>
 
@@ -207,13 +207,13 @@ include 'includes/sidebar.php';
             <span class="toggle-password" onclick="togglePasswordVisibility()">
               <i class="fas fa-eye-slash" id="passwordIcon"></i>
             </span>
-            <label for="password" class="label">Password</label>
+            <label for="password" class="label">Kata Sandi</label>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="button" onclick="closeaddUserModal()">Cancel</button>
-          <button type="submit" class="button">Save</button>
+          <button type="button" class="button" onclick="closeaddUserModal()">Batal</button>
+          <button type="submit" class="button">Simpan</button>
         </div>
       </form>
     </div>
@@ -225,7 +225,7 @@ include 'includes/sidebar.php';
     <div class="modal-container">
       <form id="editUserForm" method="POST" action="edit_staffs.php">
         <div class="modal-header">
-          <h2>Edit User</h2>
+          <h2>Edit Staf</h2>
           <span class="close-icon" onclick="closeEditUserModal()">&times;</span>
         </div>
         <div class="modal-content">
@@ -235,25 +235,25 @@ include 'includes/sidebar.php';
           </div>
           <div class="input-group">
             <input type="text" name="firstName" id="editFirstName" class="input" required>
-            <label for="editFirstName" class="label">First Name</label>
+            <label for="editFirstName" class="label">Nama Depan</label>
           </div>
           <div class="input-group">
             <input type="text" name="lastName" id="editLastName" class="input" required>
-            <label for="editLastName" class="label">Last Name</label>
+            <label for="editLastName" class="label">Nama Belakang</label>
           </div>
           <div class="input-group">
             <input type="text" name="contact" id="editContact" class="input" required>
-            <label for="editContact" class="label">Contact</label>
+            <label for="editContact" class="label">Kontak</label>
           </div>
 
           <div class="input-group" style="padding-bottom: 20px;">
             <select name="role" id="editRole" class="input" required>
-              <option value="">Role</option>
+              <option value="">Peran</option>
               <option value="admin">Admin</option>
               <option value="superadmin">Super Admin</option>
               <option value="delivery boy">Delivery Boy</option>
             </select>
-            <label for="editRole" class="label">Role</label>
+            <label for="editRole" class="label">Peran</label>
           </div>
 
           <div class="input-group">
@@ -261,12 +261,12 @@ include 'includes/sidebar.php';
             <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
               <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
             </span>
-            <label for="editPassword" class="label">Password</label>
+            <label for="editPassword" class="label">Kata Sandi</label>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="button" onclick="closeEditUserModal()">Cancel</button>
-          <button type="submit" class="button">Save</button>
+          <button type="button" class="button" onclick="closeEditUserModal()">Batal</button>
+          <button type="submit" class="button">Simpan</button>
         </div>
       </form>
     </div>
@@ -352,7 +352,7 @@ include 'includes/sidebar.php';
     });
 
     function deleteItem(email) {
-      if (confirm('Are you sure you want to delete this User?')) {
+      if (confirm('Apakah Anda yakin ingin menghapus Staf ini?')) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "delete_staffs.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
