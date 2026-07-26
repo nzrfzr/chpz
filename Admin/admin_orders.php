@@ -71,16 +71,16 @@ include 'includes/sidebar.php';
     <!-- Navigation Items -->
 
         <ul>
-            <li><a href="index.php" ><i class="fas fa-chart-line"></i> Ringkasan</a></li>
-            <li><a href="admin_menu.php"><i class="fas fa-utensils"></i> Manajemen Menu</a></li>
+            <li><a href="index.php" ><i class="fas fa-chart-line"></i>Ringkasan</a></li>
+            <li><a href="admin_menu.php"><i class="fas fa-utensils"></i>Manajemen Menu</a></li>
             <li><a href="admin_orders.php" class="active"><i class="fas fa-shopping-cart"></i> Pesanan</a></li>
-            <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i> Reservasi</a></li>
-            <li><a href="users.php"><i class="fas fa-users"></i> Pengguna</a></li>
-            <li><a href="reviews.php"><i class="fas fa-star"></i> Ulasan</a></li>
-            <li><a href="staffs.php"><i class="fas fa-users"></i> Staf</a></li>
-            <li><a href="profile.php"><i class="fas fa-user"></i> Pengaturan Profil</a></li>
-            <li><a href="settings.php"><i class="fas fa-cog"></i> Pengaturan Toko</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+            <li><a href="reservations.php"><i class="fas fa-calendar-alt"></i>Reservasi</a></li>
+            <li><a href="users.php"><i class="fas fa-users"></i>Pengguna</a></li>
+            <li><a href="reviews.php"><i class="fas fa-star"></i>Ulasan</a></li>
+            <li><a href="staffs.php"><i class="fas fa-users"></i>Staf</a></li>
+            <li><a href="profile.php"><i class="fas fa-user"></i>Pengaturan Profil</a></li>
+            <li><a href="settings.php"><i class="fas fa-cog"></i>Pengaturan Toko</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i>Keluar</a></li>
         </ul>
     </div>
     <div class="content">
