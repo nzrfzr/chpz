@@ -315,7 +315,7 @@
                 <a class="nav-link mx-lg-2 <?php echo $current_page == 'reservations.php' ? 'active' : ''; ?>" href="reservations.php">Reservasi</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-lg-2 <?php echo $current_page == '#review' ? 'active' : ''; ?>" href="#review">Ulasan</a>
+                <a class="nav-link mx-lg-2 <?php echo $current_page == 'index.php#review' ? 'active' : ''; ?>" href="#review">Ulasan</a>
               </li>
             </ul>
           </div>

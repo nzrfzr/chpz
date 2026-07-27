@@ -233,47 +233,39 @@ include 'includes/sidebar.php';
         <form id="addReservationForm" method="POST" action="add_reservation.php">
           <div class="modal-header">
             <h2>Tambah Reservasi</h2>
-            <span class="close-icon" onclick="closeModal()">&times;</span>
+            <span class="close-icon" onclick="closeaddReservationModal()">&times;</span>
           </div>
           <div class="modal-content">
             <div class="input-group">
-              <input type="email" name="email" id="email" class="input" required>
               <label for="email" class="label">Email</label>
+              <input type="email" name="email" id="email" class="input" placeholder="Masukkan email pelanggan..." required>
             </div>
-          </div>
 
-          <div class="modal-content">
             <div class="input-group">
-              <input type="text" name="name" id="name" class="input" required>
               <label for="name" class="label">Nama</label>
+              <input type="text" name="name" id="name" class="input" placeholder="Nama pelanggan..." required>
             </div>
-          </div>
 
-          <div class="modal-content">
-            <div class="input-group">
-              <input type="text" name="contact" id="contact" class="input" required>
-              <label for="contact" class="label">Kontak</label>
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="contact" class="label">Kontak</label>
+                <input type="text" name="contact" id="contact" class="input" placeholder="Nomor kontak..." required>
+              </div>
+              <div class="input-group">
+                <label for="noOfGuests" class="label">Jumlah Tamu</label>
+                <input type="number" name="noOfGuests" id="noOfGuests" class="input" placeholder="Jumlah tamu..." required min="1">
+              </div>
             </div>
-          </div>
 
-          <div class="modal-content">
-            <div class="input-group">
-              <input type="number" name="noOfGuests" id="noOfGuests" class="input" required>
-              <label for="noOfGuests" class="label">Jumlah Tamu</label>
-            </div>
-          </div>
-
-          <div class="modal-content">
-            <div class="input-group">
-              <input type="date" name="reservedDate" id="reservedDate" class="input" required>
-              <label for="reservedDate" class="label">Tanggal Reservasi</label>
-            </div>
-          </div>
-
-          <div class="modal-content">
-            <div class="input-group">
-              <input type="time" name="reservedTime" id="reservedTime" class="input" required>
-              <label for="reservedTime" class="label">Waktu Reservasi</label>
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="reservedDate" class="label">Tanggal Reservasi</label>
+                <input type="date" name="reservedDate" id="reservedDate" class="input" required>
+              </div>
+              <div class="input-group">
+                <label for="reservedTime" class="label">Waktu Reservasi</label>
+                <input type="time" name="reservedTime" id="reservedTime" class="input" required>
+              </div>
             </div>
           </div>
 
@@ -286,57 +278,56 @@ include 'includes/sidebar.php';
     </div>
 
     <!-- Modal for editing reservation -->
-<div id="editReservationModal" class="modal">
-  <div class="modal-overlay"></div>
-  <div class="modal-container">
-    <form id="editReservationForm" method="POST" action="edit_reservation.php">
-      <div class="modal-header">
-        <h2>Edit Reservasi</h2>
-        <span class="close-icon" onclick="closeEditReservationModal()">&times;</span>
+    <div id="editReservationModal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-container">
+        <form id="editReservationForm" method="POST" action="edit_reservation.php">
+          <div class="modal-header">
+            <h2>Edit Reservasi</h2>
+            <span class="close-icon" onclick="closeEditReservationModal()">&times;</span>
+          </div>
+          <div class="modal-content">
+            <input type="hidden" name="reservation_id" id="editReservationId">
+            
+            <div class="input-group">
+              <label for="editEmail" class="label">Email</label>
+              <input type="email" name="email" id="editEmail" class="input" placeholder="Masukkan email pelanggan..." required>
+            </div>
+
+            <div class="input-group">
+              <label for="editName" class="label">Nama</label>
+              <input type="text" name="name" id="editName" class="input" placeholder="Nama pelanggan..." required>
+            </div>
+
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="editContact" class="label">Kontak</label>
+                <input type="text" name="contact" id="editContact" class="input" required>
+              </div>
+              <div class="input-group">
+                <label for="editNoOfGuests" class="label">Jumlah Tamu</label>
+                <input type="number" name="noOfGuests" id="editNoOfGuests" class="input" required min="1">
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="editReservedDate" class="label">Tanggal Reservasi</label>
+                <input type="date" name="reservedDate" id="editReservedDate" class="input" required>
+              </div>
+              <div class="input-group">
+                <label for="editReservedTime" class="label">Waktu Reservasi</label>
+                <input type="time" name="reservedTime" id="editReservedTime" class="input" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button" onclick="closeEditReservationModal()">Batal</button>
+            <button type="submit" class="button">Simpan</button>
+          </div>
+        </form>
       </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="email" name="email" id="editEmail" class="input" required>
-          <label for="editEmail" class="label">Email</label>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="text" name="name" id="editName" class="input" required>
-          <label for="editName" class="label">Nama</label>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="text" name="contact" id="editContact" class="input" required>
-          <label for="editContact" class="label">Kontak</label>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="number" name="noOfGuests" id="editNoOfGuests" class="input" required>
-          <label for="editNoOfGuests" class="label">Jumlah Tamu</label>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="date" name="reservedDate" id="editReservedDate" class="input" required>
-          <label for="editReservedDate" class="label">Tanggal Reservasi</label>
-        </div>
-      </div>
-      <div class="modal-content">
-        <div class="input-group">
-          <input type="time" name="reservedTime" id="editReservedTime" class="input" required>
-          <label for="editReservedTime" class="label">Waktu Reservasi</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="button" onclick="closeEditReservationModal()">Batal</button>
-        <button type="submit" class="button">Simpan</button>
-      </div>
-    </form>
-  </div>
-</div>
+    </div>
 
 
 <?php

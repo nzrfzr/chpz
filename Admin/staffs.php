@@ -32,15 +32,6 @@ include 'includes/sidebar.php';
 
   <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/admin_user.css">
-  <style>
-    #editUserModal .modal-container {
-      height: 39rem;
-    }
-
-    #addUserModel .modal-container {
-      height: 40rem;
-    }
-  </style>
 </head>
 
 <body>
@@ -146,7 +137,7 @@ include 'includes/sidebar.php';
   <!-- Modal for adding users -->
   <div id="addUserModal" class="modal">
     <div class="modal-overlay"></div>
-    <div class="modal-container" style="height: 40rem;">
+    <div class="modal-container">
       <form id="addUserForm" method="POST" action="add_staffs.php">
         <div class="modal-header">
           <h2>Tambah Staf</h2>
@@ -154,51 +145,46 @@ include 'includes/sidebar.php';
         </div>
         <div class="modal-content">
           <div class="input-group">
-            <input type="email" name="email" id="email" class="input" required>
             <label for="email" class="label">Email</label>
+            <input type="email" name="email" id="email" class="input" placeholder="Masukkan email staf..." required>
           </div>
-        </div>
 
-        <div class="modal-content">
-          <div class="input-group">
-            <input type="text" name="firstName" id="firstName" class="input" required>
-            <label for="firstName" class="label">Nama Depan</label>
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="firstName" class="label">Nama Depan</label>
+              <input type="text" name="firstName" id="firstName" class="input" placeholder="Nama depan..." required>
+            </div>
+            <div class="input-group">
+              <label for="lastName" class="label">Nama Belakang</label>
+              <input type="text" name="lastName" id="lastName" class="input" placeholder="Nama belakang..." required>
+            </div>
           </div>
-        </div>
 
-        <div class="modal-content">
-          <div class="input-group">
-            <input type="text" name="lastName" id="lastName" class="input" required>
-            <label for="lastName" class="label">Nama Belakang</label>
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="contact" class="label">Kontak</label>
+              <input type="text" name="contact" id="contact" class="input" placeholder="Nomor kontak..." required>
+            </div>
+            <div class="input-group">
+              <label for="role" class="label">Peran</label>
+              <select name="role" id="role" class="input" required>
+                <option value="" disabled selected hidden>Pilih peran...</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Super Admin</option>
+                <option value="delivery boy">Delivery Boy</option>
+                <option value="waiter">Waiter</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="modal-content">
           <div class="input-group">
-            <input type="text" name="contact" id="contact" class="input" required>
-            <label for="contact" class="label">Kontak</label>
-          </div>
-        </div>
-        <div class="modal-content">
-          <div class="input-group">
-            <select name="role" id="role" class="input" required>
-              <option value="">Peran</option>
-              <option value="admin">Admin</option>
-              <option value="superadmin">Super Admin</option>
-              <option value="delivery boy">Delivery Boy</option>
-              <option value="waiter">Waiter</option>
-            </select>
-            <label for="role" class="label">Peran</label>
-          </div>
-        </div>
-
-        <div class="modal-content">
-          <div class="input-group">
-            <input type="password" name="password" id="Password" class="input" required>
-            <span class="toggle-password" onclick="togglePasswordVisibility()">
-              <i class="fas fa-eye-slash" id="passwordIcon"></i>
-            </span>
-            <label for="password" class="label">Kata Sandi</label>
+            <label for="Password" class="label">Kata Sandi</label>
+            <div class="password-container">
+              <input type="password" name="password" id="Password" class="input" placeholder="Masukkan kata sandi..." required>
+              <span class="toggle-password" onclick="togglePasswordVisibility()">
+                <i class="fas fa-eye-slash" id="passwordIcon"></i>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -221,38 +207,46 @@ include 'includes/sidebar.php';
         </div>
         <div class="modal-content">
           <div class="input-group">
-            <input type="email" name="email" id="editEmail" class="input" required readonly>
             <label for="editEmail" class="label">Email</label>
-          </div>
-          <div class="input-group">
-            <input type="text" name="firstName" id="editFirstName" class="input" required>
-            <label for="editFirstName" class="label">Nama Depan</label>
-          </div>
-          <div class="input-group">
-            <input type="text" name="lastName" id="editLastName" class="input" required>
-            <label for="editLastName" class="label">Nama Belakang</label>
-          </div>
-          <div class="input-group">
-            <input type="text" name="contact" id="editContact" class="input" required>
-            <label for="editContact" class="label">Kontak</label>
+            <input type="email" name="email" id="editEmail" class="input" readonly>
           </div>
 
-          <div class="input-group" style="padding-bottom: 20px;">
-            <select name="role" id="editRole" class="input" required>
-              <option value="">Peran</option>
-              <option value="admin">Admin</option>
-              <option value="superadmin">Super Admin</option>
-              <option value="delivery boy">Delivery Boy</option>
-            </select>
-            <label for="editRole" class="label">Peran</label>
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="editFirstName" class="label">Nama Depan</label>
+              <input type="text" name="firstName" id="editFirstName" class="input" required>
+            </div>
+            <div class="input-group">
+              <label for="editLastName" class="label">Nama Belakang</label>
+              <input type="text" name="lastName" id="editLastName" class="input" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="editContact" class="label">Kontak</label>
+              <input type="text" name="contact" id="editContact" class="input" required>
+            </div>
+            <div class="input-group">
+              <label for="editRole" class="label">Peran</label>
+              <select name="role" id="editRole" class="input" required>
+                <option value="" disabled selected hidden>Pilih peran...</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Super Admin</option>
+                <option value="delivery boy">Delivery Boy</option>
+                <option value="waiter">Waiter</option>
+              </select>
+            </div>
           </div>
 
           <div class="input-group">
-            <input type="password" name="password" id="editPassword" class="input" required>
-            <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
-              <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
-            </span>
             <label for="editPassword" class="label">Kata Sandi</label>
+            <div class="password-container">
+              <input type="password" name="password" id="editPassword" class="input" required>
+              <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
+                <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
+              </span>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

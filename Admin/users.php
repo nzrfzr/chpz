@@ -144,39 +144,34 @@ include 'includes/sidebar.php';
         </div>
         <div class="modal-content">
           <div class="input-group">
-            <input type="email" name="email" id="email" class="input" required>
             <label for="email" class="label">Email</label>
+            <input type="email" name="email" id="email" class="input" placeholder="Masukkan email pengguna..." required>
           </div>
-        </div>
 
-        <div class="modal-content">
-          <div class="input-group">
-            <input type="text" name="firstName" id="firstName" class="input" required>
-            <label for="firstName" class="label">Nama Depan</label>
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="firstName" class="label">Nama Depan</label>
+              <input type="text" name="firstName" id="firstName" class="input" placeholder="Nama depan..." required>
+            </div>
+            <div class="input-group">
+              <label for="lastName" class="label">Nama Belakang</label>
+              <input type="text" name="lastName" id="lastName" class="input" placeholder="Nama belakang..." required>
+            </div>
           </div>
-        </div>
 
-        <div class="modal-content">
           <div class="input-group">
-            <input type="text" name="lastName" id="lastName" class="input" required>
-            <label for="lastName" class="label">Nama Belakang</label>
-          </div>
-        </div>
-
-        <div class="modal-content">
-          <div class="input-group">
-            <input type="text" name="contact" id="contact" class="input" required>
             <label for="contact" class="label">Kontak</label>
+            <input type="text" name="contact" id="contact" class="input" placeholder="Nomor kontak (contoh: 0812345678)..." required>
           </div>
-        </div>
 
-        <div class="modal-content">
           <div class="input-group">
-            <input type="password" name="password" id="Password" class="input" required>
-            <span class="toggle-password" onclick="togglePasswordVisibility()">
-              <i class="fas fa-eye-slash" id="passwordIcon"></i>
-            </span>
-            <label for="password" class="label">Kata Sandi</label>
+            <label for="Password" class="label">Kata Sandi</label>
+            <div class="password-container">
+              <input type="password" name="password" id="Password" class="input" placeholder="Masukkan kata sandi..." required>
+              <span class="toggle-password" onclick="togglePasswordVisibility()">
+                <i class="fas fa-eye-slash" id="passwordIcon"></i>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -199,27 +194,34 @@ include 'includes/sidebar.php';
         </div>
         <div class="modal-content">
           <div class="input-group">
-            <input type="email" name="email" id="editEmail" class="input" required readonly>
             <label for="editEmail" class="label">Email</label>
+            <input type="email" name="email" id="editEmail" class="input" readonly>
           </div>
-          <div class="input-group">
-            <input type="text" name="firstName" id="editFirstName" class="input" required>
-            <label for="editFirstName" class="label">Nama Depan</label>
+
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="editFirstName" class="label">Nama Depan</label>
+              <input type="text" name="firstName" id="editFirstName" class="input" required>
+            </div>
+            <div class="input-group">
+              <label for="editLastName" class="label">Nama Belakang</label>
+              <input type="text" name="lastName" id="editLastName" class="input" required>
+            </div>
           </div>
+
           <div class="input-group">
-            <input type="text" name="lastName" id="editLastName" class="input" required>
-            <label for="editLastName" class="label">Nama Belakang</label>
-          </div>
-          <div class="input-group">
-            <input type="text" name="contact" id="editContact" class="input" required>
             <label for="editContact" class="label">Kontak</label>
+            <input type="text" name="contact" id="editContact" class="input" required>
           </div>
+
           <div class="input-group">
-            <input type="password" name="password" id="editPassword" class="input" required>
-            <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
-              <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
-            </span>
             <label for="editPassword" class="label">Kata Sandi</label>
+            <div class="password-container">
+              <input type="password" name="password" id="editPassword" class="input" required>
+              <span class="toggle-password" onclick="toggleEditPasswordVisibility()">
+                <i class="fas fa-eye-slash" id="editPasswordIcon"></i>
+              </span>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

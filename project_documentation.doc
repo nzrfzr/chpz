@@ -1,0 +1,926 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Laporan Dokumentasi Teknis Proyek - Cheapiza</title>
+<style>
+    @page {
+        size: A4;
+        margin: 2cm;
+    }
+    body {
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        line-height: 1.6;
+        color: #333333;
+        font-size: 11pt;
+    }
+    h1 {
+        color: #fb4a36;
+        font-size: 20pt;
+        border-bottom: 2px solid #fb4a36;
+        padding-bottom: 8px;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    h2 {
+        color: #2c3e50;
+        font-size: 15pt;
+        margin-top: 30px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #dddddd;
+        padding-bottom: 5px;
+    }
+    h3 {
+        color: #34495e;
+        font-size: 12pt;
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 12px;
+        text-align: justify;
+    }
+    ul, ol {
+        margin-top: 0;
+        margin-bottom: 12px;
+        padding-left: 20px;
+    }
+    li {
+        margin-bottom: 5px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 10pt;
+    }
+    th, td {
+        border: 1px solid #cccccc;
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: top;
+    }
+    th {
+        background-color: #f2f2f2;
+        color: #fb4a36;
+        font-weight: bold;
+        border-bottom: 2px solid #cccccc;
+    }
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+    .code-block {
+        font-family: 'Consolas', 'Courier New', monospace;
+        background-color: #f5f5f5;
+        border-left: 4px solid #fb4a36;
+        padding: 10px 15px;
+        margin: 15px 0;
+        font-size: 9.5pt;
+        white-space: pre-wrap;
+        color: #2c3e50;
+    }
+    .badge {
+        display: inline-block;
+        padding: 3px 8px;
+        background-color: #fb4a36;
+        color: #ffffff;
+        border-radius: 3px;
+        font-size: 8.5pt;
+        font-weight: bold;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .cover-title {
+        font-size: 26pt;
+        color: #fb4a36;
+        font-weight: bold;
+        margin-top: 100px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .cover-subtitle {
+        font-size: 14pt;
+        color: #7f8c8d;
+        margin-bottom: 150px;
+        text-align: center;
+    }
+    .cover-meta {
+        font-size: 11pt;
+        margin-top: 200px;
+        text-align: center;
+        color: #2c3e50;
+        line-height: 1.8;
+    }
+    .page-break {
+        page-break-after: always;
+    }
+</style>
+</head>
+<body>
+
+<!-- HALAMAN SAMPUL -->
+<div class="page-break" style="text-align: center;">
+    <div class="cover-title">LAPORAN DOKUMENTASI TEKNIS</div>
+    <div class="cover-title" style="font-size: 32pt; margin-top: 10px;">CHEAPIZA</div>
+    <div class="cover-subtitle">Sistem Pemesanan Fast Food & Reservasi Meja Online<br>Terintegrasi Midtrans Payment Gateway</div>
+    
+    <div class="cover-meta">
+        <strong>Dibuat Untuk:</strong><br>
+        Tugas Pemrograman Web 2 (Cheapiza Workspace)<br><br>
+        <strong>Teknologi Utama:</strong><br>
+        PHP Native | MySQL | Midtrans Snap API & Webhook | Bootstrap | jQuery<br><br>
+        <strong>Tanggal Pembuatan Dokumen:</strong><br>
+        26 Juli 2026
+    </div>
+</div>
+
+<!-- DAFTAR ISI / PENDAHULUAN -->
+<h2>1. Pendahuluan & Ringkasan Proyek</h2>
+<p>
+    <strong>Cheapiza</strong> adalah aplikasi web berbasis PHP Native yang dirancang untuk mempermudah pemesanan makanan cepat saji (seperti pizza, burger, dan minuman) serta layanan reservasi meja restoran secara online. Sistem ini dirancang untuk memberikan kemudahan bagi pelanggan dalam bertransaksi secara aman melalui integrasi payment gateway, sekaligus menyediakan panel administrasi yang kuat bagi pengelola restoran untuk mengontrol seluruh operasional bisnis.
+</p>
+<p>
+    Salah satu keunggulan utama dari proyek ini adalah integrasi dengan <strong>Midtrans Payment Gateway (Snap API & Webhooks)</strong>. Dengan integrasi ini, pembayaran dapat divalidasi secara otomatis oleh sistem secara real-time tanpa perlu verifikasi manual bukti transfer oleh admin, sehingga meminimalkan human error dan mempercepat alur kerja pesanan.
+</p>
+
+<h2>2. Arsitektur Sistem</h2>
+<p>
+    Cheapiza menggunakan arsitektur <strong>Client-Server</strong> tradisional berbasis PHP. Interaksi dinamis di sisi klien (client-side) didukung oleh <strong>AJAX (Asynchronous JavaScript and XML)</strong> menggunakan pustaka jQuery, yang memungkinkan penambahan item ke keranjang dan perubahan jumlah pesanan tanpa harus memuat ulang seluruh halaman.
+</p>
+
+<h3>Komponen Arsitektur Utama:</h3>
+<ul>
+    <li><strong>Portal Pelanggan (Customer Portal - Root Directory):</strong> Menangani interaksi langsung dengan pelanggan seperti pendaftaran akun, pemesanan menu, pengelolaan keranjang, checkout pembayaran, pelacakan riwayat pesanan, dan pengisian ulasan atau reservasi meja.</li>
+    <li><strong>Portal Admin (Admin Portal - Direktori `/Admin`):</strong> Panel kontrol khusus administrator dan staf restoran untuk manajemen database menu, pemantauan transaksi, pengelolaan status pesanan, moderasi ulasan, manajemen akun staf, dan konfigurasi pengaturan sistem.</li>
+    <li><strong>Database Relasional (MySQL):</strong> Berfungsi sebagai media penyimpanan persisten untuk seluruh data pengguna, staf, menu, item keranjang, transaksi, detail pesanan, ulasan, reservasi, dan parameter pengaturan.</li>
+    <li><strong>Midtrans API Gateway (Eksternal):</strong> Layanan pihak ketiga untuk memproses otorisasi pembayaran online secara aman melalui Snap API (sisi klien) dan Webhook (sisi server).</li>
+</ul>
+
+<h2>3. Stack Teknologi & Pustaka</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 25%;">Komponen</th>
+            <th style="width: 35%;">Teknologi / Pustaka</th>
+            <th style="width: 40%;">Deskripsi / Kegunaan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Backend</strong></td>
+            <td>PHP Native (Procedural & Prepared Statements)</td>
+            <td>Logika aplikasi, manajemen sesi (Session), manipulasi database, dan HTTP client menggunakan cURL.</td>
+        </tr>
+        <tr>
+            <td><strong>Database</strong></td>
+            <td>MySQL / MariaDB (Driver <code>mysqli</code>)</td>
+            <td>Penyimpanan data relasional dengan validasi prepared statements guna mencegah serangan SQL Injection.</td>
+        </tr>
+        <tr>
+            <td><strong>Frontend Framework</strong></td>
+            <td>Bootstrap 5.3.3 & Bootstrap 4.5.2</td>
+            <td>Kerangka kerja CSS responsif untuk menunjang tata letak grid dan elemen antarmuka yang konsisten.</td>
+        </tr>
+        <tr>
+            <td><strong>Frontend Library</strong></td>
+            <td>jQuery v3.5.1</td>
+            <td>Menangani manipulasi DOM dan request AJAX untuk operasi keranjang belanja yang dinamis.</td>
+        </tr>
+        <tr>
+            <td><strong>Desain & Efek</strong></td>
+            <td>AOS (Animate On Scroll) & Owl Carousel 2</td>
+            <td>AOS digunakan untuk animasi kemunculan elemen saat di-scroll; Owl Carousel 2 digunakan untuk slider testimoni pelanggan di halaman utama.</td>
+        </tr>
+        <tr>
+            <td><strong>Ikon & Tipografi</strong></td>
+            <td>FontAwesome (v5 & v6) & Google Fonts (Poppins, Chewy, Allura)</td>
+            <td>Menyediakan visualisasi ikon modern serta font premium untuk mempercantik antarmuka web.</td>
+        </tr>
+        <tr>
+            <td><strong>Payment Gateway</strong></td>
+            <td>Midtrans Snap API & Webhooks</td>
+            <td>Layanan pembayaran online terintegrasi (Virtual Account, E-Wallet, Kartu Kredit) dengan notifikasi otomatis ke server.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>4. Skema & Desain Database</h2>
+<p>
+    Aplikasi ini menggunakan database bernama <code>cheapiza_fastfood</code>. Berikut adalah rincian tabel beserta struktur kolom dan relasinya:
+</p>
+
+<h3>1. Tabel <code>users</code> (Data Akun Pelanggan)</h3>
+<p>Menyimpan data kredensial dan profil pelanggan.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>email</strong></td>
+            <td>VARCHAR(255)</td>
+            <td>Primary Key. Email login unik pelanggan.</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>VARCHAR(255)</td>
+            <td>Kata sandi akun pelanggan (disimpan dalam teks biasa).</td>
+        </tr>
+        <tr>
+            <td>firstName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama depan pelanggan.</td>
+        </tr>
+        <tr>
+            <td>lastName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama belakang pelanggan.</td>
+        </tr>
+        <tr>
+            <td>contact</td>
+            <td>VARCHAR(20)</td>
+            <td>Nomor telepon aktif pelanggan.</td>
+        </tr>
+        <tr>
+            <td>profile_image</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama berkas gambar profil (default: default.jpg).</td>
+        </tr>
+        <tr>
+            <td>dateCreated</td>
+            <td>TIMESTAMP</td>
+            <td>Tanggal pendaftaran akun (default: CURRENT_TIMESTAMP).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>2. Tabel <code>staff</code> (Data Akun Administrator & Staf)</h3>
+<p>Menyimpan data staf restoran yang memiliki akses ke Portal Admin.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Email login unik staf (Unique Key).</td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>VARCHAR(255)</td>
+            <td>Kata sandi akun staf (disimpan dalam teks biasa).</td>
+        </tr>
+        <tr>
+            <td>firstName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama depan staf.</td>
+        </tr>
+        <tr>
+            <td>lastName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama belakang staf.</td>
+        </tr>
+        <tr>
+            <td>contact</td>
+            <td>VARCHAR(20)</td>
+            <td>Nomor telepon staf.</td>
+        </tr>
+        <tr>
+            <td>role</td>
+            <td>VARCHAR(50)</td>
+            <td>Hak akses staf (<code>superadmin</code>, <code>admin</code>, <code>delivery boy</code>, <code>waiter</code>).</td>
+        </tr>
+        <tr>
+            <td>profile_image</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama berkas gambar profil staf.</td>
+        </tr>
+        <tr>
+            <td>createdAt</td>
+            <td>TIMESTAMP</td>
+            <td>Tanggal pendaftaran akun staf.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Tabel <code>menucategory</code> (Kategori Hidangan)</h3>
+<p>Menyimpan klasifikasi kategori menu makanan.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>catName</strong></td>
+            <td>VARCHAR(100)</td>
+            <td>Primary Key. Nama kategori unik (misal: Pizza, Burger, Drinks).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>4. Tabel <code>menuitem</code> (Katalog Menu Hidangan)</h3>
+<p>Menyimpan detail makanan dan minuman yang dijual.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>itemName</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama hidangan.</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama berkas gambar menu yang diunggah ke folder uploads.</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>TEXT</td>
+            <td>Deskripsi komposisi hidangan.</td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td>DOUBLE</td>
+            <td>Harga satuan hidangan dalam Rupiah.</td>
+        </tr>
+        <tr>
+            <td>catName</td>
+            <td>VARCHAR(100)</td>
+            <td>Foreign Key menghubungkan ke <code>menucategory(catName)</code>.</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>VARCHAR(50)</td>
+            <td>Status ketersediaan barang (<code>Available</code> atau <code>Unavailable</code>).</td>
+        </tr>
+        <tr>
+            <td>is_popular</td>
+            <td>TINYINT(1)</td>
+            <td>Status menu terpopuler untuk halaman utama (1 = populer, 0 = biasa).</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h3>5. Tabel <code>cart</code> (Keranjang Belanja Sementara)</h3>
+<p>Menyimpan daftar belanjaan sementara milik pengguna sebelum dicheckout.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>itemName</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama hidangan yang dipilih.</td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td>DOUBLE</td>
+            <td>Harga satuan hidangan.</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>VARCHAR(255)</td>
+            <td>Gambar hidangan.</td>
+        </tr>
+        <tr>
+            <td>quantity</td>
+            <td>INT</td>
+            <td>Jumlah item yang dibeli.</td>
+        </tr>
+        <tr>
+            <td>total_price</td>
+            <td>DOUBLE</td>
+            <td>Akumulasi harga (price * quantity).</td>
+        </tr>
+        <tr>
+            <td>catName</td>
+            <td>VARCHAR(100)</td>
+            <td>Kategori hidangan.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Foreign Key menghubungkan ke email pembeli di tabel <code>users(email)</code>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>6. Tabel <code>orders</code> (Transaksi Pesanan Master)</h3>
+<p>Menyimpan ringkasan informasi utama pemesanan dan transaksi pembayaran.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>order_id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment. ID unik pesanan.</td>
+        </tr>
+        <tr>
+            <td>firstName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama depan penerima pesanan.</td>
+        </tr>
+        <tr>
+            <td>lastName</td>
+            <td>VARCHAR(100)</td>
+            <td>Nama belakang penerima pesanan.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Email pembeli.</td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>VARCHAR(20)</td>
+            <td>Nomor telepon penerima.</td>
+        </tr>
+        <tr>
+            <td>address</td>
+            <td>TEXT</td>
+            <td>Alamat pengiriman pesanan.</td>
+        </tr>
+        <tr>
+            <td>sub_total</td>
+            <td>DOUBLE</td>
+            <td>Harga total seluruh barang.</td>
+        </tr>
+        <tr>
+            <td>grand_total</td>
+            <td>DOUBLE</td>
+            <td>Harga total keseluruhan setelah ditambah ongkos kirim.</td>
+        </tr>
+        <tr>
+            <td>pmode</td>
+            <td>VARCHAR(50)</td>
+            <td>Metode Pembayaran (<code>Takeaway</code>, <code>Cash</code>, <code>Midtrans</code>).</td>
+        </tr>
+        <tr>
+            <td>note</td>
+            <td>TEXT</td>
+            <td>Catatan khusus untuk pengiriman atau pesanan.</td>
+        </tr>
+        <tr>
+            <td>payment_status</td>
+            <td>VARCHAR(50)</td>
+            <td>Status pembayaran (<code>Pending</code>, <code>Successful</code>, <code>Rejected</code>).</td>
+        </tr>
+        <tr>
+            <td>order_status</td>
+            <td>VARCHAR(50)</td>
+            <td>Status pesanan (<code>Pending</code>, <code>Processing</code>, <code>On the Way</code>, <code>Completed</code>, <code>Cancelled</code>).</td>
+        </tr>
+        <tr>
+            <td>order_date</td>
+            <td>TIMESTAMP</td>
+            <td>Tanggal transaksi dibuat.</td>
+        </tr>
+        <tr>
+            <td>cancel_reason</td>
+            <td>TEXT</td>
+            <td>Alasan pembatalan pesanan jika status berubah menjadi Cancelled.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>7. Tabel <code>order_items</code> (Detail Barang Transaksi)</h3>
+<p>Menyimpan daftar makanan yang dibeli dalam satu transaksi (Relasi One-to-Many dari <code>orders</code>).</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>order_id</td>
+            <td>INT</td>
+            <td>Foreign Key menghubungkan ke <code>orders(order_id)</code> (ON DELETE CASCADE).</td>
+        </tr>
+        <tr>
+            <td>itemName</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama makanan yang dibeli.</td>
+        </tr>
+        <tr>
+            <td>quantity</td>
+            <td>INT</td>
+            <td>Jumlah item.</td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td>DOUBLE</td>
+            <td>Harga satuan saat dibeli.</td>
+        </tr>
+        <tr>
+            <td>total_price</td>
+            <td>DOUBLE</td>
+            <td>Total harga item (price * quantity).</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>VARCHAR(255)</td>
+            <td>Berkas gambar menu saat dibeli.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h3>8. Tabel <code>reservations</code> (Pemesanan Meja)</h3>
+<p>Menyimpan data reservasi meja restoran oleh pelanggan.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Email pemesan.</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama lengkap perwakilan pemesan.</td>
+        </tr>
+        <tr>
+            <td>contact</td>
+            <td>VARCHAR(20)</td>
+            <td>Nomor kontak pemesan.</td>
+        </tr>
+        <tr>
+            <td>noOfGuests</td>
+            <td>INT</td>
+            <td>Jumlah tamu yang akan hadir.</td>
+        </tr>
+        <tr>
+            <td>reservedTime</td>
+            <td>TIME</td>
+            <td>Jam kedatangan reservasi.</td>
+        </tr>
+        <tr>
+            <td>reservedDate</td>
+            <td>DATE</td>
+            <td>Tanggal rencana kedatangan.</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>VARCHAR(50)</td>
+            <td>Status reservasi (<code>Pending</code>, <code>On Process</code>, <code>Completed</code>, <code>Cancelled</code>).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>9. Tabel <code>reviews</code> (Ulasan Pelanggan)</h3>
+<p>Menyimpan ulasan dan rating yang diberikan oleh pelanggan terkait pesanan mereka.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>order_id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Menghubungkan ke <code>orders(order_id)</code>.</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Email pengulas.</td>
+        </tr>
+        <tr>
+            <td>rating</td>
+            <td>INT</td>
+            <td>Nilai rating bintang (skala 1 - 5).</td>
+        </tr>
+        <tr>
+            <td>review_text</td>
+            <td>TEXT</td>
+            <td>Pesan ulasan tertulis dari pelanggan.</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>VARCHAR(50)</td>
+            <td>Status moderasi ulasan (<code>pending</code>, <code>approved</code>, <code>rejected</code>).</td>
+        </tr>
+        <tr>
+            <td>response</td>
+            <td>TEXT</td>
+            <td>Respon / tanggapan balasan tertulis dari Admin.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>10. Tabel <code>settings</code> (Konfigurasi Global Sistem)</h3>
+<p>Penyimpanan konfigurasi parameter sistem dengan pendekatan Key-Value Pair.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>key_name</strong></td>
+            <td>VARCHAR(100)</td>
+            <td>Primary Key. Nama variabel pengaturan.</td>
+        </tr>
+        <tr>
+            <td>key_value</td>
+            <td>TEXT</td>
+            <td>Isi nilai dari variabel tersebut.</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <strong>Parameter Terdaftar:</strong> <code>midtrans_merchant_id</code>, <code>midtrans_client_key</code>, <code>midtrans_server_key</code>, <code>midtrans_environment</code> (sandbox/production), dan <code>shipping_fee</code> (biaya kirim default).
+</p>
+
+<h3>11. Tabel <code>bukti_pembayaran</code> (Unggah Bukti Transfer Fisik - Opsional/Cadangan)</h3>
+<p>Menyimpan data unggahan bukti bayar fisik jika pelanggan tidak menggunakan Midtrans (misal transfer bank manual).</p>
+<table>
+    <thead>
+        <tr>
+            <th>Nama Kolom</th>
+            <th>Tipe Data</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>id</strong></td>
+            <td>INT</td>
+            <td>Primary Key. Auto Increment.</td>
+        </tr>
+        <tr>
+            <td>order_id</td>
+            <td>INT</td>
+            <td>Foreign Key menghubungkan ke <code>orders(order_id)</code> (ON DELETE CASCADE).</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR(255)</td>
+            <td>Email pelanggan pengunggah.</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>VARCHAR(255)</td>
+            <td>Nama berkas gambar bukti pembayaran yang diunggah.</td>
+        </tr>
+        <tr>
+            <td>uploaded_at</td>
+            <td>TIMESTAMP</td>
+            <td>Waktu unggah berkas (default: CURRENT_TIMESTAMP).</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>5. Fitur Utama Sistem</h2>
+
+<h3>A. Portal Pelanggan (Customer Portal)</h3>
+<ol>
+    <li>
+        <strong>Landing Page Informatif (<code>index.php</code>):</strong>
+        Desain antarmuka modern yang menyajikan sambutan hangat, promosi, daftar testimoni pelanggan terverifikasi, dan produk unggulan yang diambil dari database dengan status <code>is_popular = 1</code>.
+    </li>
+    <li>
+        <strong>Autentikasi Pengguna:</strong>
+        Registrasi akun pelanggan baru via <code>dbregister.php</code> dan login sistem via <code>dblogin.php</code> dengan pengecekan peran (staf dialihkan ke admin portal, pelanggan dialihkan ke menu utama).
+    </li>
+    <li>
+        <strong>Pemesanan Menu Makanan (<code>menu.php</code>):</strong>
+        Pelanggan dapat menyaring makanan berdasarkan kategori klasifikasinya. Tombol pesanan akan otomatis dinonaktifkan (disabled) dengan label "Tidak Tersedia" jika status produk diatur <code>Unavailable</code> oleh pengelola. Operasi keranjang menggunakan AJAX agar mempercepat pengalaman pemesanan.
+    </li>
+    <li>
+        <strong>Manajemen Keranjang Belanja & Checkout Dinamis (<code>cart.php</code>):</strong>
+        Dukungan interaktif bagi pengguna untuk mengubah jumlah belanjaan (plus/minus) secara real-time. Pelanggan dapat menggunakan checkbox untuk memilih item mana saja yang akan dibayar dalam transaksi saat itu, dan total tagihan akan langsung terhitung ulang via JavaScript.
+        Metode pembayaran didukung oleh 3 pilihan:
+        <ul>
+            <li><strong>Takeaway:</strong> Pelanggan mengambil sendiri makanan di gerai restoran (Biaya Pengiriman otomatis diubah menjadi Rp 0).</li>
+            <li><strong>Cash:</strong> Bayar tunai di tempat saat kurir mengantarkan pesanan (Biaya Pengiriman ditambahkan sesuai pengaturan).</li>
+            <li><strong>Midtrans:</strong> Pembayaran online non-tunai secara otomatis (Virtual Account, E-Wallet, Kartu).</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Konfirmasi & Review Pesanan (<code>order_review.php</code>):</strong>
+        Halaman verifikasi data alamat pengantaran, kontak, serta penulisan catatan pesanan khusus sebelum data dimasukkan secara transaksional ke database melalui <code>process_order.php</code>.
+    </li>
+    <li>
+        <strong>Integrasi Pembayaran Online (<code>midtrans_payment.php</code>):</strong>
+        Memuat antarmuka Snap overlay terintegrasi dari Midtrans untuk penyelesaian transaksi non-tunai di halaman web Cheapiza tanpa berpindah situs.
+    </li>
+    <li>
+        <strong>Riwayat Pemesanan & Ulasan (<code>orders.php</code>):</strong>
+        Menampilkan pesanan aktif dan selesai dalam tab khusus. Di halaman ini pula pelanggan dapat melakukan pembatalan pesanan mandiri dengan menyertakan alasan pembatalan (hanya berlaku jika status pesanan masih "Pending") serta memberikan rating bintang (1-5) dan ulasan tertulis untuk pesanan yang telah selesai.
+    </li>
+    <li>
+        <strong>Reservasi Meja Restoran (<code>reservations.php</code>):</strong>
+        Formulir pemesanan meja secara online. Data nama, email, dan telepon akan otomatis terisi secara dinamis jika pengguna telah login ke sistem.
+    </li>
+</ol>
+
+<h3>B. Portal Pengelola (Admin Portal - `/Admin`)</h3>
+<ol>
+    <li>
+        <strong>Dashboard & Ringkasan Penjualan (<code>Admin/index.php</code>):</strong>
+        Menyajikan statistik total pendapatan dari transaksi yang berhasil lewat Midtrans, pendapatan hari ini, jumlah pesanan masuk, jumlah pengguna terdaftar, serta jumlah reservasi meja. Dilengkapi dengan indikator persentase tren naik/turun dibandingkan dengan periode sebelumnya.
+    </li>
+    <li>
+        <strong>Manajemen Katalog Menu (<code>Admin/admin_menu.php</code>):</strong>
+        Modul CRUD lengkap untuk menambahkan produk baru, menyunting harga, mengubah gambar menu, mengedit deskripsi, menambahkan kategori baru, menonaktifkan status barang, atau mengatur item tersebut masuk dalam daftar menu populer di halaman utama.
+    </li>
+    <li>
+        <strong>Manajemen Pesanan Restoran (<code>Admin/admin_orders.php</code>):</strong>
+        Daftar pesanan masuk yang dapat dicari berdasarkan ID pesanan atau disaring berdasarkan status pesanan. Melalui halaman detail pesanan (<code>view_order.php</code>), admin dapat membarui tahapan pesanan (Pending -> Processing -> On the Way -> Completed/Cancelled) serta mengubah status verifikasi pembayaran secara manual.
+    </li>
+    <li>
+        <strong>Pengelolaan Reservasi Meja (<code>Admin/reservations.php</code>):</strong>
+        Memungkinkan admin menyetujui, memproses, menyelesaikan, atau membatalkan reservasi meja pelanggan restoran yang masuk.
+    </li>
+    <li>
+        <strong>Moderasi Ulasan Pelanggan (<code>Admin/reviews.php</code>):</strong>
+        Menyaring ulasan bernada spam sebelum ditampilkan pada halaman testimoni publik. Admin juga dapat menuliskan respon tanggapan resmi restoran untuk setiap ulasan pelanggan.
+    </li>
+    <li>
+        <strong>Manajemen Staf & Pengguna (<code>Admin/staffs.php</code> & <code>Admin/users.php</code>):</strong>
+        Mengelola data pengguna terdaftar dan data akun staf internal restoran (pemberian otorisasi sebagai Staf Admin, Super Admin, Delivery Boy, atau Waiter).
+    </li>
+    <li>
+        <strong>Pengaturan Toko & Gateway (<code>Admin/settings.php</code>):</strong>
+        Mengubah besaran nominal biaya pengiriman default dan mengganti kredensial integrasi Midtrans (Merchant ID, Client Key, Server Key, Sandbox/Production mode) secara dinamis tanpa mengubah baris kode PHP.
+    </li>
+</ol>
+
+<div class="page-break"></div>
+
+<h2>6. Detail Integrasi Midtrans Payment Gateway</h2>
+<p>
+    Alur integrasi Midtrans pada Cheapiza dibangun dengan struktur yang aman menggunakan kombinasi Snap API (frontend overlay) dan Webhook (backend notification handler).
+</p>
+
+<h3>Langkah Pemrosesan Transaksi Pembayaran Online:</h3>
+<ol>
+    <li>
+        <strong>Inisiasi Pembayaran:</strong> Saat pelanggan memilih metode "Midtrans" di halaman checkout, file <code>process_order.php</code> memasukkan data transaksi ke tabel <code>orders</code> dan mengalihkan pelanggan ke halaman <code>midtrans_payment.php?order_id={id}</code>.
+    </li>
+    <li>
+        <strong>Permintaan Snap Token (Server-to-Server):</strong> 
+        Aplikasi backend PHP membuat request cURL POST berisi data detail transaksi (ID pesanan lokal yang disematkan timestamp agar selalu unik, grand total belanjaan) dan profil lengkap pelanggan ke API Endpoint Midtrans.
+        <div class="code-block">
+POST https://app.sandbox.midtrans.com/snap/v1/transactions
+Headers:
+  Accept: application/json
+  Content-Type: application/json
+  Authorization: Basic [Base64(ServerKey + ":")]
+Payload:
+{
+  "transaction_details": {
+    "order_id": "CHEAPIZA-[order_id]-[timestamp]",
+    "gross_amount": [grand_total]
+  },
+  "customer_details": {
+    "first_name": "[NamaDepan]",
+    "last_name": "[NamaBelakang]",
+    "email": "[EmailPelanggan]",
+    "phone": "[NomorTelepon]"
+  }
+}</div>
+        Midtrans merespon dengan mengembalikan kode <code>Snap Token</code> transaksi.
+    </li>
+    <li>
+        <strong>Menampilkan Antarmuka Snap (Client-side):</strong>
+        Halaman <code>midtrans_payment.php</code> memuat SDK JavaScript Snap milik Midtrans (<code>snap.js</code>) dan memicu modal overlay di layar pelanggan menggunakan perintah <code>snap.pay('[Snap Token]')</code>. Pelanggan dapat menyelesaikan transaksi langsung tanpa harus meninggalkan situs.
+    </li>
+    <li>
+        <strong>Sinkronisasi Webhook Asinkron (Server-to-Server):</strong>
+        Saat pembayaran diselesaikan, server Midtrans mengirimkan notifikasi callback HTTP POST secara asinkron ke file handler <code>midtrans_webhook.php</code> di server Cheapiza.
+    </li>
+    <li>
+        <strong>Verifikasi Kunci Tanda Tangan (Signature Key Verification):</strong>
+        Guna mencegah manipulasi status pembayaran oleh pihak ketiga (Fraud / Fake Request), file <code>midtrans_webhook.php</code> memverifikasi validitas data dengan mencocokkan signature key dari payload Midtrans dengan kunci lokal menggunakan rumus enkripsi SHA512:
+        <div class="code-block">
+$local_signature = hash("sha512", $order_id . $status_code . $gross_amount . $server_key);</div>
+        Jika <code>$local_signature</code> tidak cocok dengan payload <code>signature_key</code> dari Midtrans, sistem langsung menolak request dengan status HTTP <code>403 Forbidden</code>.
+    </li>
+    <li>
+        <strong>Pembaruan Status Database Otomatis:</strong>
+        Jika verifikasi tanda tangan valid, sistem memetakan status transaksi Midtrans ke database lokal sebagai berikut:
+        <ul>
+            <li><code>settlement</code> atau <code>capture</code> (dengan status fraud 'accept') &rarr; <code>payment_status = 'Successful'</code>, <code>order_status = 'Processing'</code>.</li>
+            <li><code>pending</code> &rarr; <code>payment_status = 'Pending'</code>, <code>order_status = 'Pending'</code>.</li>
+            <li><code>deny</code>, <code>cancel</code>, atau <code>expire</code> &rarr; <code>payment_status = 'Rejected'</code>, <code>order_status = 'Cancelled'</code>.</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>7. Panduan Konfigurasi & Pemasangan</h2>
+<h3>1. Konfigurasi Koneksi Database</h3>
+<p>
+    Pastikan kredensial database disesuaikan pada file db_connection.php dengan parameter lingkungan server lokal Anda:
+</p>
+<div class="code-block">
+&lt;?php
+$servername = "localhost";
+$username = "cheapiza";
+$password = "cheapz2026";
+$dbname = "cheapiza_fastfood";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Koneksi database gagal: " . $conn->connect_error);
+}
+?&gt;</div>
+
+<h3>2. Pengujian Callback Webhook di Localhost</h3>
+<p>
+    Karena Midtrans Webhook memerlukan alamat server publik yang aktif untuk mengirimkan request notifikasi HTTP POST ke server lokal Anda (localhost), Anda harus melakukan langkah-langkah berikut:
+</p>
+<ul>
+    <li>Unduh dan jalankan aplikasi tunnel seperti <strong>Ngrok</strong> di komputer lokal Anda.</li>
+    <li>Jalankan terowongan HTTP pada port server web lokal Anda (misal port Laragon/Apache di 80):
+        <div class="code-block">ngrok http 80</div>
+    </li>
+    <li>Salin URL publik HTTPS yang diberikan oleh Ngrok (contoh: <code>https://abcdef123.ngrok-free.app</code>).</li>
+    <li>Masuk ke Dashboard Midtrans Sandbox Anda, buka menu <strong>Settings > Integrations > Notification URL</strong>, lalu daftarkan alamat webhook Cheapiza:
+        <div class="code-block">https://abcdef123.ngrok-free.app/tugasweb2_cheapiza/midtrans_webhook.php</div>
+    </li>
+    <li>Simpan konfigurasi tersebut. Kini seluruh simulasi pembayaran yang diselesaikan di Snap overlay akan otomatis sinkron ke database lokal Anda secara real-time.</li>
+</ul>
+
+</body>
+</html>
